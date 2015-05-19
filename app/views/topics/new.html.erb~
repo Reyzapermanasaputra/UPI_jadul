@@ -1,0 +1,5 @@
+<br />
+<br />
+<span class="text-info"><h2>New Topic</h2></span>
+
+<%= render 'form' %>

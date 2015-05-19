@@ -1,0 +1,20 @@
+<div class="panel panel-warning">
+  <div class="panel-heading">
+    <h3 class="panel-title"><h2><%= @topic.level %></h4></h2>
+  </div>
+ <% @units.each do |unit| %>
+  <div class="panel-body">
+      <h4><%= link_to unit.content, [unit.topic, unit] %></h4><br />
+      Author : <%= unit.user.name %>
+<% if can? :update, Unit %>
+ <%= link_to 'Edit Units', edit_topic_unit_path(unit.topic, unit) %>
+<% end %>
+<% if can? :destroy, Unit %>
+ <%= link_to 'Destroy', [unit.topic, unit], :confirm => 'Are you sure?', :method => :delete %>
+<% end %><hr />
+  </div>
+<% end %>
+</div>
+<% if can? :create, Unit %>
+  <%= link_to 'New Units', new_topic_unit_path, class: "btn btn-warning" %>
+<% end %>

@@ -1,0 +1,4 @@
+class RemoveUserIdFromContents < ActiveRecord::Migration
+  def change
+  end
+end

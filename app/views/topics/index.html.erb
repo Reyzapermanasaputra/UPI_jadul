@@ -1,0 +1,38 @@
+<span class="text-default"><h3>Learn Grammar</h3></span>
+
+<span class="text-default">Free, interactive tutorial to help you learning grammar in your browser!</span>
+
+<br />
+<br />
+<ul class="nav">
+    <% @topics.each do |topic| %>
+    <div class="nav-collapse">
+    <div class="col-xs-3 col-md-3">
+    <a href="#" class="thumbnail">
+      <%= image_tag topic.avatar.url, :width => 100, :height => 120, :crop => :fill %>
+    </a>
+    </div>
+<h3><span class="text-default"><%= link_to topic.level, topic_units_path(topic.id), class: "newsomething" %>
+</span></h3>
+<span class="text-default"><%= topic.description %>
+</span>
+<nav>
+  <ul class="pager">
+    <li class="next"><%= link_to "Start Course", topic_units_path(topic.id) %>
+     </li>
+  </ul>
+</nav>
+<% if can? :edit, Topic %>
+  <%= link_to 'Edit', edit_topic_path(topic.id) %>
+<% end %>
+<% if can? :destroy, Topic %>
+  <%= link_to 'Destroy', topic, method: :delete, data: { confirm: 'Are you sure?' } %>
+   <% end %>
+</div>
+</ul>
+<hr />
+    <% end %><br />
+<% if can? :create, Topic %>
+  <%= link_to 'New Topic', new_topic_path, class: "btn btn-info" %>
+<% end %>
+<br />

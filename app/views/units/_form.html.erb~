@@ -1,0 +1,30 @@
+<%= nested_form_for([@unit.topic, @unit]) do |f| %>
+   <% if @unit.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@unit.errors.count, "error") %> prohibited this unit from being saved:</h2>
+
+      <ul>
+      <% @unit.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :content, "Unit" %>
+    <%= f.text_area :content, :rows => 1 %>
+  </div>
+
+  <%= f.fields_for :contents do |builder| %>
+    <%= builder.label :title %>
+    <%= builder.text_area :title, :rows => 1 %>
+    <%= builder.label :body %>
+    <%= builder.cktext_area :body, :cols => 40, :ckeditor => {:uiColor => '#AADC6E', :toolbar => 'mini'} %>
+    <%= builder.link_to_remove "Remove" %>
+    <% end %>
+    <%= f.link_to_add "Add Content", :contents %>
+  <div class="field">
+    <%= f.submit "Create Unit", class: 'btn btn-warning' %>
+  </div>
+<% end %>

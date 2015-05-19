@@ -1,0 +1,44 @@
+<br/>
+<br/>
+
+<h1>Listing Lecturers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nip</th>
+      <th>Name</th>
+      <th>Place</th>
+      <th>Birth</th>
+      <th>Work unit</th>
+      <th>Address</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th>Role</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @lecturers.each do |lecturer| %>
+      <tr>
+        <td><%= lecturer.nip %></td>
+        <td><%= lecturer.name %></td>
+        <td><%= lecturer.place %></td>
+        <td><%= lecturer.born %></td>
+        <td><%= lecturer.work_unit %></td>
+        <td><%= lecturer.address %></td>
+        <td><%= lecturer.phone %></td>
+        <td><%= lecturer.email %></td>
+        <td><%= lecturer.role.name %></td>
+        <td><%= link_to 'Show', lecturer %></td>
+        <td><%= link_to 'Edit', edit_lecturer_path(lecturer) %></td>
+        <td><%= link_to 'Destroy', lecturer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Lecturer', new_lecturer_path %>

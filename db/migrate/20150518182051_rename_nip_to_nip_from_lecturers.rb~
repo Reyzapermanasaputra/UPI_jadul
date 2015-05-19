@@ -1,0 +1,4 @@
+class RenameNipToNipFromLecturers < ActiveRecord::Migration
+  def change
+  end
+end

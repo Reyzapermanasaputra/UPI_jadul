@@ -1,0 +1,14 @@
+class ContentsController < ApplicationController
+  before_filter :authenticate_user!
+  load_and_authorize_resource
+  def index
+    @contents = @unit.contents.desc(:created_at).page(params[:page]).per(1)
+    render @comments
+  end
+
+  private
+  def get_unit
+    @unit = Unit.find(params[:unit_id]) if params[:unit_id]
+    redirect_to root_path unless defined?(@unit)
+  end
+end

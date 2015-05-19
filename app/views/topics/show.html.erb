@@ -1,0 +1,15 @@
+<br />
+<br />
+<div class="panel panel-info">
+<div class="panel-heading">
+<h3 class="panel-title"><%= link_to @topic.level, topic_units_path(@topic) %></h3>
+</div>
+
+<div class="panel-body">
+<%= @topic.description %>
+ <%= link_to 'Edit', edit_topic_path(@topic), class: "btn btn-warning" %> |
+<%= link_to 'Back', topics_path, class: "btn btn-default" %> | <br />
+</div>
+</div>
+
+<%= link_to 'Create Units', topic_units_path(@topic), class: "btn btn-info" %>

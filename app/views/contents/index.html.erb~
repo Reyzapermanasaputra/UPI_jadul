@@ -1,0 +1,18 @@
+<br />
+<br />
+
+<div class="panel panel-warning">
+  <div class="panel-heading">
+    <h3 class="panel-title"><h4><%= @unit.content %></h4></h3>
+  </div>
+ <% @contents.each do |content| %>
+  <div class="panel-body">
+      <h6><%= link_to content.title %>
+          <%= link_to content.body %></h6>
+ <%= link_to 'Edit Units', edit_topic_unit_content_path(unit.topic, unit) %> |
+ <%= link_to 'Destroy', [content.unit, content], :confirm => 'Are you sure?', :method => :delete %><hr />
+  </div>
+<% end %>
+</div>
+
+<%= link_to 'New Units', new_topic_unit_content_path, class: "btn btn-warning" %>

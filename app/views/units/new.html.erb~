@@ -1,0 +1,8 @@
+<br />
+<br />
+
+<span class="text-info"><h2>New Unit</h2></span>
+
+ <%= render 'form' %>
+
+<%= link_to 'Back', topic_units_path(@unit.topic) %>

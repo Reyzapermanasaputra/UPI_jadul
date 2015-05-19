@@ -1,0 +1,4 @@
+class RemoveUserIdFromTopics < ActiveRecord::Migration
+  def change
+  end
+end

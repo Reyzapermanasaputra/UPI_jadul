@@ -1,0 +1,44 @@
+<br />
+<br />
+<p>
+  <strong>Name course:</strong>
+  <%= @course.name_course %>
+</p>
+
+<p>
+  <strong>Code course:</strong>
+  <%= @course.code_course %>
+</p>
+
+<p>
+  <strong>Sks:</strong>
+  <%= @course.sks %>
+</p>
+
+<p>
+  <strong>Program study:</strong>
+  <%= @course.program_study %>
+</p>
+
+<p>
+  <strong>Semester:</strong>
+  <%= @course.semester %>
+</p>
+
+<p>
+  <strong>Prerequisite:</strong>
+  <%= @course.prerequisite %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @course.description %>
+</p>
+
+<p>
+  <strong>Lecturer: Mr</strong>
+  <%= @course.lecturer.name %>
+</p>
+
+<%= link_to 'Edit', edit_lecturer_course_path(@course.lecturer, @course) %> |
+<%= link_to 'Back', lecturer_courses_path(@course.lecturer) %>

@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nip:</strong>
+  <%= @lecturer.nip %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @lecturer.name %>
+</p>
+
+<p>
+  <strong>Place:</strong>
+  <%= @lecturer.place %>
+</p>
+
+<p>
+  <strong>Birth:</strong>
+  <%= @lecturer.born %>
+</p>
+
+<p>
+  <strong>Work unit:</strong>
+  <%= @lecturer.work_unit %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @lecturer.address %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @lecturer.phone %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @lecturer.email %>
+</p>
+
+<p>
+  <strong>Role:</strong>
+  <%= @lecturer.role.name %>
+</p>
+<%= link_to 'Add Course', lecturer_courses_path(@lecturer) %>
+<%= link_to 'Edit', edit_lecturer_path(@lecturer) %> |
+<%= link_to 'Back', lecturers_path %>

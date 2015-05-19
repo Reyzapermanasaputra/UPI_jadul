@@ -1,0 +1,8 @@
+<br />
+<br />
+
+ <span class="text-info"><h2>Edit Unit</h2></span>
+
+ <%= render 'form' %>
+
+ <%= link_to "Cancel", topic_comments_path(@unit.topic), class: "btn btn_danger" %>

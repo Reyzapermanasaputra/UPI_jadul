@@ -1,0 +1,4 @@
+class AddUserId2ToTopics < ActiveRecord::Migration
+  def change
+  end
+end

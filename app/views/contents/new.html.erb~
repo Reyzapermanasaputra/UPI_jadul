@@ -1,0 +1,20 @@
+<p><% @unit.content do |content| %>
+  <%= content.title %>
+</p>
+
+<h4>Content : </h4>
+<%= form_for([@unit, @unit.contents.build]) do |f| %>
+ <p>
+    <%= f.label :Title %><br>
+    <%= f.text_field :Title %>
+  </p>
+  <p>
+    <%= f.label :body %><br>
+    <%= f.text_area :body %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+
+<%= link_to "Cancel", topic_unit_contents_path(@topic, @unit), class: "btn btn-warning" %>

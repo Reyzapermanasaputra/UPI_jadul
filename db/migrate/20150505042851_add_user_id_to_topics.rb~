@@ -1,0 +1,5 @@
+class AddUserIdToTopics < ActiveRecord::Migration
+  def change
+    add_column :topic, :user_id, :string
+  end
+end
