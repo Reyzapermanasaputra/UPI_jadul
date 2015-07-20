@@ -1,0 +1,39 @@
+<h1>Listing Question</h1>
+
+<p>Total : <%= @questions.size %> </p>
+<p>
+<nav>
+  <ul class="pager">
+  <li class="previous"><%= link_to 'New Question',new_topic_question_path%></li>
+  </ul>
+</nav>
+</p>
+<table class="table table-stripped">
+  <tr>
+    <th>Text</th>
+    <th>Choices</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @questions.each do |question| %>
+  <tr>
+    <td><%= question.text %></td>
+    <td>
+      <ul>
+      <% question.choices.each do |choice| %>
+        <li>
+        <%= choice.text %>
+        <% if choice.correct %> (Correct) <% end %>
+        </li>
+      <% end %>
+      </ul>
+    </td>
+    <td><%= link_to 'add choices', [question.topic, question] %></td>
+    <td><%= link_to 'edit', edit_topic_question_path(question.topic, question) %></td>
+    <td><%= link_to 'Destroy', [question.topic, question], :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+  <% end %>
+  </table>
+<%= link_to 'back to courses', user_topics_path(current_user.id) %>

@@ -3,10 +3,44 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  #Relationship
   belongs_to :role
   has_many :topics
   has_many :units
+  has_many :microposts, dependent: :destroy
+  has_many :relationships, foreign_key: "follower_id", dependent: :destroy
+  has_many :followed_users, through: :relationships, source: :followed
+  has_many :reverse_relationships, foreign_key: "followed_id", class_name: "Relationship", dependent: :destroy
+  has_many :followers, through: :reverse_relationships, source: :follower
 
+  #feed time line
+  def feed
+    Micropost.from_users_followed_by(self)
+  end
+
+  #relathionship
+  def following?(other_user)
+    relationships.find_by_followed_id(other_user.id)
+  end
+
+  def follow!(other_user)
+    relationships.create!(followed_id: other_user.id)
+  end
+
+  def unfollow!(other_user)
+    relationships.find_by_followed_id(other_user.id).destroy
+  end
+
+  #photo
+  has_attached_file :photo, :style => {:thumb => 'x100', :croppable => '600x600>', :big => '1000x1000>'}, :url => "/system/:attachment/:id/:style/:basename.:extension",
+  :path => ":rails_root/public/system/:attachment/:id/:style/:basename.:extension"
+  validates_attachment_content_type :photo, :content_type => /\Aimage\/.*\Z/
+  validates_attachment_presence :photo
+  validates_attachment_size :photo, :less_than => 5.megabytes
+  validates_attachment_content_type :photo, :content_type => ['image/jpg', 'image/png', 'image/jpeg']
+
+  #role
   validates_presence_of :name
   before_save :assign_role
 
@@ -18,11 +52,26 @@ class User < ActiveRecord::Base
     self.role.name == "Admin"
   end
 
-  def author?
-    self.role.name == "Author"
+  def lecturer?
+    self.role.name == "Lecturer"
+  end
+
+  def student?
+    self.role.name == "Student"
   end
 
   def guess?
     self.role.name == "Guess"
+  end
+
+  #Messaging
+  acts_as_messageable
+
+  def mailboxer_name
+    self.name
+  end
+
+  def mailboxer_email(object)
+    self.email
   end
 end

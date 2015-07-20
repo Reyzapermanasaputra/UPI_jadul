@@ -1,17 +1,85 @@
+<h1 class="page-header">Profile</h1>
+  <div class="container">
+    <div class="row profile">
+      <div class="col-md-3">
+        <div class="profile-sidebar">
+	  <!-- SIDEBAR USERPIC -->
+	    <div class="profile-userpic">
+            <%= image_tag @user.photo.url, :width => 100, :height => 120, :crop => :fill, :class => "avatar img-circle img-thumbnail", :alt => "", :class => "img-responsive" %>
+	     </div>
+		<!-- END SIDEBAR USERPIC -->
+		<!-- SIDEBAR USER TITLE -->
+		<div class="profile-usertitle">
+		  <div class="profile-usertitle-name">
+		    <%= @user.name %>
+		  </div>
+		  <div class="profile-usertitle-job">
+		    <%= @user.role.name %>
+		  </div>
+                  <div class="profile-usertitle-job">
+                    <%= pluralize(@user.microposts.count, "Status") %>
+		  </div>
+                   <div class="profile-usertitle-job">
+ 		    <%= render 'shared/stats' %>
+                  </div>
+                  <div class="profile-usertitle-job">
+                    <% if user_signed_in? and @user.role.name == "Lecturer" %>
+                    <%= link_to "See Courses", user_topics_path(@user.id) %>
+                    <% end %>
+                  </div>
 <br />
-<br />
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
 
-<p>
-  <strong>Role:</strong>
-  <%= @user.role %>
-</p>
-<p>
-  <strong>Email:
-  <%= @user.email %>
-</p>
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+         </div>
+		<!-- END SIDEBAR USER TITLE -->
+		<!-- SIDEBAR BUTTONS -->
+		<div class="profile-userbuttons">
+		<%= link_to 'Edit', edit_user_path(@user), :class => "btn btn-success btn-sm" %>
+		<%= link_to 'Back', users_path, :class => "btn btn-danger btn-sm"%>
+		</div>
+		<!-- END SIDEBAR BUTTONS -->
+		<!-- SIDEBAR MENU -->
+		<div class="profile-usermenu">
+		  <ul class="nav">
+		    <li class="active">
+                    <% if @course_item %>
+                      <%= link_to "Courses", user_courses_path(@user.id) %>
+                    <% end %>
+		    <a href="#">
+		     <i class="glyphicon glyphicon-home"></i>
+		       <%= @user.email %> </a>
+		    </li>
+		    <li>
+		    <a href="#">
+		     <i class="glyphicon glyphicon-user"></i>
+		       Joined : <%= @joined_on %> </a>
+		     </li>
+		    <li>
+		   <a href="#" target="_blank">
+		     <i class="glyphicon glyphicon-ok"></i>
+			<%= @last_login %> </a>
+                     </li>
+		     <li>
+	               <a href="#">
+			  <i class="glyphicon glyphicon-flag"></i>
+			<%= @user.sign_in_count %> </a>
+		     </li>
+		     </ul>
+		     </div>
+<!-- END MENU --></div>
+	</div>
+                <div class="col-md-9">
+                  <div class="profile-content">
+                    <%= render 'follow_form' if user_signed_in? %>
+	            <% if  @user.microposts.any? %>
+                      <h3>Microposts (<%= @user.microposts.count %>)</h3><br />
+                      <ol class="microposts" %>
+                        <%= render @microposts %>
+                      </ol>
+                    <% else %>
+                      <h3><span>Nothing Status</span></h3>
+                    <% end %>
+
+                  </div>
+		</div>
+	</div>
+</div>

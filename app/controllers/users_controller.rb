@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_filter :authenticate_user!
-  load_and_authorize_resource
+  before_filter :authenticate_user!, except: [:show]
+  load_and_authorize_resource except: [:show, :following, :followers]
   # GET /users
   # GET /users.json
   def index
@@ -11,6 +11,8 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @user = User.find(params[:id])
+    @microposts = @user.microposts.order('created_at DESC')
     @joined_on = @user.created_at.to_formatted_s(:short)
       if @user.current_sign_in_at
         @last_login = @user.current_sign_in_at.to_formatted_s(:short)
@@ -78,6 +80,20 @@ class UsersController < ApplicationController
     end
   end
 
+  def following
+    @title = "Following"
+    @user = User.find_by_id(params[:id])
+    @users = @user.followed_users
+    render 'show_follow'
+  end
+
+  def followers
+    @title = "Followers"
+    @user = User.find_by_id(params[:id])
+    @users = @user.followers
+    render 'show_follow'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -86,7 +102,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, :role_id)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :role_id, :photo)
     end
   protected
     def needs_password?(user, params)

@@ -2,5 +2,4 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', [course.lecturer, course] %> |
 <%= link_to 'Back', lecturer_courses_path(@course.lecturer) %>

@@ -1,0 +1,7 @@
+<h1>Comments</h1>
+
+<ul id="comments">
+  <% for comment in @comments %>
+    Comment: <%=h comment.body %></p>
+<% end %>
+</ul>

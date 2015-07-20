@@ -1,0 +1,6 @@
+<%= form_for(@micropost) do |f| %>
+    <div class="form-group">
+    <%= f.text_area :content, placeholder: "What your info . . . ", autofocus: true, rows: "3", class: "form-control" %>
+    </div>
+  <%= f.submit "Post", class: "btn btn-default pull-right" %><br />
+<% end %>

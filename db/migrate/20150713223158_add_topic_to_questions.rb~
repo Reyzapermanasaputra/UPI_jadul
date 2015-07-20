@@ -1,0 +1,4 @@
+class AddTopicToQuestions < ActiveRecord::Migration
+  def change
+  end
+end

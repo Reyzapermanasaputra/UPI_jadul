@@ -37,8 +37,8 @@
 
 <p>
   <strong>Lecturer: Mr</strong>
-  <%= @course.lecturer.name %>
+  <%= @course.user.name %>
 </p>
 
-<%= link_to 'Edit', edit_lecturer_course_path(@course.lecturer, @course) %> |
-<%= link_to 'Back', lecturer_courses_path(@course.lecturer) %>
+<%= link_to 'Edit', edit_lecturer_course_path(@course.user, @course) %> |
+<%= link_to 'Back', lecturer_courses_path(@course.user) %>

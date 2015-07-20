@@ -21,10 +21,28 @@
     <%= builder.text_area :title, :rows => 1 %>
     <%= builder.label :body %>
     <%= builder.cktext_area :body, :cols => 40, :ckeditor => {:uiColor => '#AADC6E', :toolbar => 'mini'} %>
-    <%= builder.link_to_remove "Remove" %>
+<nav>
+  <ul class="pager">
+    <li class="previous"> <%= builder.link_to_remove "Remove" %>
+     </li>
+  </ul>
+</nav>
+
     <% end %>
-    <%= f.link_to_add "Add Content", :contents %>
+<nav>
+  <ul class="pager">
+    <li class="previous"> <%= f.link_to_add "Add Content", :contents %>
+     </li>
+  </ul>
+</nav>
+
   <div class="field">
-    <%= f.submit "Create Unit", class: 'btn btn-warning' %>
+<nav>
+  <ul class="pager">
+    <li class="previous"><%= f.submit "Create Unit" %>
+     </li>
+  </ul>
+</nav>
+
   </div>
 <% end %>

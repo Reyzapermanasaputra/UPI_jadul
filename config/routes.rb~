@@ -1,16 +1,43 @@
 Rails.application.routes.draw do
   devise_for :lecturers
-  root to: 'topics#index'
+  root to: 'static_pages#home'
+  get "mailbox/inbox" => "mailbox#inbox", as: :mailbox_inbox
+  get "mailbox/sent" => "mailbox#sent", as: :mailbox_sent
+  get "mailbox/trash" => "mailbox#trash", as: :mailbox_trash
+  resources :conversations do
+    member do
+      post :reply
+      post :trash
+      post :untrash
+    end
+  end
   devise_for :users
+  resources :microposts, only: [:create, :destroy]
+  resources :relationships, only: [:create, :destroy]
   scope "/admin" do
-    resources :users
-    resources :lecturers do
-      resources :courses
+    resources :users do
+      resources :topics
+      member do
+        get :following, :followers
+      end
+    end
   end
   resources :roles
+
   mount Ckeditor::Engine => '/ckeditor'
      resources :topics do
-       resources :units
+          collection do
+	   get "/:id/quiz", :to => 'quiz#index', as: :quiz
+           post "/:id/quiz", :to => 'quiz#start'
+           get "/:id/quiz/question", :to => 'quiz#question', as: :question_quiz
+ 	   post "/:id/quiz/question", :to => 'quiz#question'
+	   post "/:id/quiz/answer", :to => 'quiz#answer', as: :answer_quiz
+	   get "/:id/quiz/end", :to => 'quiz#end'
+	   post "choices/create"
+	   post "choices/destroy"
+         end
+         resources :units
+         resources :questions
 end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

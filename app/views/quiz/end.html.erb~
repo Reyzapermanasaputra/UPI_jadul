@@ -1,0 +1,30 @@
+<br />
+<br />
+<div class="row">
+  <div class="spacer"></div>
+  <div class="col-xs-2">
+  <div class="spacer"></div>
+</div>
+<div class="col-xs-8">
+  <div class="panel panel-default">
+    <div class="panel-body">
+<div class="text-center"><h3>Your Result</h3>
+<p id="question">Heyy <%= current_user.name %> you answered correctly <%= @correct %> out of <%= @total %> question</p>
+
+<p id="score">your score <%= @score %></p>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= @score  %>%;">
+    <%= @score %> %
+    </div>
+      </div>
+
+<%= form_tag({:controller => "quiz", :action => "index"}, :method => "get") do %>
+  <div class="center">
+    <%= submit_tag("Go Back", :class => "submit") %>
+  </div>
+<% end %>
+    </div>
+  </div>
+</div>
+</div>
+</div>

@@ -1,0 +1,14 @@
+<blockquote>
+<li>
+  <div class="profile-userpic2">
+            <%= image_tag @user.photo.url, :width => 10, :height => 10, :crop => :fill, :class => "avatar img-circle img-thumbnail", :alt => "", :class => "img-responsive" %></div>
+  <span class="content"><h4><%= micropost.content %></h4></span>
+  <span class="timestamp">
+  Posted <%= time_ago_in_words(micropost.created_at) %> ago. | <% if current_user?(micropost.user) %>
+   <%= link_to "delete", micropost, method: :delete, confirm: "Are you sure ?", title: micropost.content %>
+
+   <% end %>
+  </span>
+</li>
+</blockquote>
+<hr />

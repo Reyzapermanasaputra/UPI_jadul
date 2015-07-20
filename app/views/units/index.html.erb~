@@ -1,14 +1,17 @@
-<br />
-<br />
-
 <div class="panel panel-warning">
   <div class="panel-heading">
     <h3 class="panel-title"><h2><%= @topic.level %></h4></h2>
   </div>
  <% @units.each do |unit| %>
   <div class="panel-body">
-      <h4><%= link_to unit.content, [unit.topic, unit] %></h4><br />
-      Author : <%= unit.user.name %>
+<nav>
+  <ul class="pager">
+    <li class="previous"><%= link_to unit.content, [unit.topic, unit]%>
+     </li>
+  </ul>
+</nav>
+<br />
+      Author : <% if unit.user %> by <%= link_to unit.user.name, user_path(unit.user.id) %><% end %>
 <% if can? :update, Unit %>
  <%= link_to 'Edit Units', edit_topic_unit_path(unit.topic, unit) %>
 <% end %>
@@ -19,5 +22,21 @@
 <% end %>
 </div>
 <% if can? :create, Unit %>
-  <%= link_to 'New Units', new_topic_unit_path, class: "btn btn-warning" %>
+<nav>
+  <ul class="pager">
+    <li class="previous"><%= link_to 'New Units', new_topic_unit_path%>
+     </li>
+  </ul>
+</nav>
+
+<nav>
+  <ul class="pager">
+  <li class="previous"><%= link_to 'Question Bank',topic_questions_path%></li>
+  </ul>
+</nav>
 <% end %>
+<nav>
+  <ul class="pager">
+  <li class="forward"><%= link_to 'Start Quiz', quiz_topics_path(@topi %></li>
+  </ul>
+</nav>

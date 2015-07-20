@@ -28,10 +28,10 @@
         <td><%= course.semester %></td>
         <td><%= course.prerequisite %></td>
         <td><%= course.description %></td>
-        <td><%= course.lecturer.name %></td>
-        <td><%= link_to 'Show', [course.lecturer, course] %></td>
-        <td><%= link_to 'Edit', edit_lecturer_course_path(course.lecturer, course) %></td>
-        <td><%= link_to 'Destroy', [course.lecturer, course], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= course.user.name %></td>
+        <td><%= link_to 'Show', [course.user, course] %></td>
+        <td><%= link_to 'Edit', edit_lecturer_course_path(course.user, course) %></td>
+        <td><%= link_to 'Destroy', [course.user, course], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -39,4 +39,4 @@
 
 <br>
 
-<%= link_to 'New Course', new_lecturer_course_path %>
+<%= link_to 'New Course', new_user_course_path %>

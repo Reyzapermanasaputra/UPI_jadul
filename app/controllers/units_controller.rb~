@@ -1,6 +1,5 @@
 class UnitsController < ApplicationController
   load_and_authorize_resource except: :create
-
   def index
    @topic = Topic.find(params[:topic_id])
    @units = @topic.units.order('id ASC')
@@ -15,7 +14,7 @@ class UnitsController < ApplicationController
   def show
     @topic = Topic.find(params[:topic_id])
     @unit = @topic.units.find(params[:id])
-    @contents = @unit.contents.order("created_at DESC").page(params[:page]).per(1)
+    @contents = @unit.contents.order("created_at ASC").page(params[:page]).per(1)
   end
 
   def edit

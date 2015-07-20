@@ -1,0 +1,9 @@
+Profil Dosen                            Mahasiswa
+ 	NIP				   NIM
+ 	Nama				   Nama
+ 	Alamat/Lokasi			   Alamat/Lokasi
+ 	Telepon				   Telepon
+ 	Email                             Email
+	Email				   Kelas
+ 	Matakuliah yang diampu
+One Roles Belongs to Profil 

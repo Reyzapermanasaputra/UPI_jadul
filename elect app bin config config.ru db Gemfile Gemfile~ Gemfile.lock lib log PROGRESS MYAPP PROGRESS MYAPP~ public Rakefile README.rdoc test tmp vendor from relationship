@@ -1,0 +1,16 @@
+             List of relations
+ Schema |       Name        | Type  | Owner 
+--------+-------------------+-------+-------
+ public | ckeditor_assets   | table | reyza
+ public | contents          | table | reyza
+ public | courses           | table | reyza
+ public | lecturers         | table | reyza
+ public | microposts        | table | reyza
+ public | relationships     | table | reyza
+ public | roles             | table | reyza
+ public | schema_migrations | table | reyza
+ public | topics            | table | reyza
+ public | units             | table | reyza
+ public | users             | table | reyza
+(11 rows)
+

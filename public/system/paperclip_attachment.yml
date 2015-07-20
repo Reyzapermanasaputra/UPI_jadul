@@ -1,0 +1,6 @@
+---
+:User:
+  :photo:
+  - :thumb
+  - :croppable
+  - :big

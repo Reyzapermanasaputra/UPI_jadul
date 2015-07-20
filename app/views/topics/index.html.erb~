@@ -1,8 +1,6 @@
-<p id="notice"><%= notice %></p>
+<span class="text-default"><h3>My Courses</h3></span>
 
-<span class="text-default"><h3>Learn Grammar</h3></span>
-
-<span class="text-default">Free, interactive tutorial to help you learning grammar in your browser!</span>
+<span class="text-default">Management course for your teach</span>
 
 <br />
 <br />
@@ -20,21 +18,27 @@
 </span>
 <nav>
   <ul class="pager">
-    <li class="next"><%= link_to "Start Course", topic_units_path(topic.id) %>
+    <li class="next"><%= link_to "See Course", topic_units_path(topic.id) %>
      </li>
   </ul>
 </nav>
 <% if can? :edit, Topic %>
-  <%= link_to 'Edit', edit_topic_path(topic.id) %>
+  <%= link_to 'Edit', edit_user_topic_path(topic.user, topic) %>
 <% end %>
 <% if can? :destroy, Topic %>
-  <%= link_to 'Destroy', topic, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <%= link_to 'Destroy', [topic.user, topic], method: :delete, data: { confirm: 'Are you sure?' } %>
    <% end %>
 </div>
 </ul>
 <hr />
     <% end %><br />
 <% if can? :create, Topic %>
-  <%= link_to 'New Topic', new_topic_path, class: "btn btn-info" %>
+<nav>
+  <ul class="pager">
+    <li class="previous"><%= link_to 'New Topic', new_user_topic_path%>
+     </li>
+  </ul>
+</nav>
+
 <% end %>
 <br />

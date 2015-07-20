@@ -3,13 +3,17 @@
 <head>
   <title>UPI</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= stylesheet_link_tag "//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" %>
   <%= javascript_include_tag 'application'%>
   <%= csrf_meta_tags %>
 </head>
 <body>
 <%= render 'layouts/header' %>
-<% flash.each do |name, msg| %>
-  <%= content_tag :div, msg, id: "flash_#{name}" %>
+<% flash.each do |type, msg| %><br>
+  <div class="alert <%= flash_class type %> alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  <p><%= msg %></p>
+  </div>
 <% end %>
 
 <div class="container" style="padding-top:20px;">

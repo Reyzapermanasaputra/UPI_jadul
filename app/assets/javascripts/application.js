@@ -17,3 +17,6 @@
 //= require bootstrap
 //= require ckeditor/init
 //= require_tree .
+$('.timeline-panel').click(function() {
+    $('.timeline-body', this).toggle(); // p00f
+});

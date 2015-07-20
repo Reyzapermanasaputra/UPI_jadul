@@ -18,6 +18,14 @@
 </nav>
 <br />
 <% if can? :update, Unit %>
-  <%= link_to 'Edit', edit_topic_unit_path(@unit.topic, @unit), class: "btn   btn-warning" %>
+<nav>
+  <ul class="pager">
+    <li class="previous"> <%= link_to 'Edit', edit_topic_unit_path(@unit.topic, @unit)%>
+     </li>
 <% end %>
-<%= link_to 'Back', topic_units_path(@unit.topic), class: "btn btn-info" %>
+<nav>
+  <ul class="pager">
+<li class="previous"><%= link_to 'Back', topic_units_path(@unit.topic)%></li>
+  </ul>
+</nav>
+<% render template: "comments/index" %>

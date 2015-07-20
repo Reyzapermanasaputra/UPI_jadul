@@ -1,36 +1,41 @@
 class TopicsController < ApplicationController
-  before_action :set_topic, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
+  before_filter :authenticate_user!
   # GET /topics
   # GET /topics.json
   def index
-    @topics = Topic.all.order('id ASC')
+    @user = User.find(params[:user_id])
+    @topics = @user.topics.all.order('id ASC')
   end
 
   # GET /topics/1
   # GET /topics/1.json
   def show
-    @topic = Topic.find_by_id(params[:id])
+    @user = User.find(params[:user_id])
+    @topic = @user.topics.find(params[:id])
   end
 
   # GET /topics/new
   def new
-    @topic = Topic.new
+    @user = User.find(params[:user_id])
+    @topic = @user.topics.build
   end
 
   # GET /topics/1/edit
   def edit
-    @topic = Topic.find_by_id(params[:id])
+    @user = User.find(params[:user_id])
+    @topic = @user.topics.find(params[:id])
   end
 
   # POST /topics
   # POST /topics.json
   def create
-    @topic = Topic.new(topic_params)
+    @user = User.find(params[:user_id])
+    @topic = @user.topics.create(topic_params)
     @topic.user_id = current_user.id
     respond_to do |format|
       if @topic.save
-        format.html { redirect_to @topic, notice: 'Topic was successfully created.' }
+        format.html { redirect_to user_topics_url, notice: 'Topic was successfully created.' }
         format.json { render :show, status: :created, location: @topic }
       else
         format.html { render :new }
@@ -42,6 +47,8 @@ class TopicsController < ApplicationController
   # PATCH/PUT /topics/1
   # PATCH/PUT /topics/1.json
   def update
+    @user = User.find(params[:user_id])
+    @topic = @user.topics.find(topic_params)
     if @topic.update(topic_params)
       flash[:notice] = 'Upload was successfully updated'
       redirect_to topics_url
@@ -53,18 +60,17 @@ class TopicsController < ApplicationController
   # DELETE /topics/1
   # DELETE /topics/1.json
   def destroy
+    @user = User.find(params[:user_id])
+    @topic = @user.topics.find(params[:id])
     @topic.destroy
     respond_to do |format|
-      format.html { redirect_to topics_url, notice: 'Topic was successfully destroyed.' }
+      format.html { redirect_to user_topics_url, notice: 'Topic was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_topic
-      @topic = Topic.find(params[:id])
-    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def topic_params

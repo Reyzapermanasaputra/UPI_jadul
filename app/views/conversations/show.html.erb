@@ -1,0 +1,42 @@
+<br />
+<br />
+<div class="row">
+  <div class="spacer"></div>
+  <div class="col-md-12">
+  <%= link_to new_conversation_path, class: "btn btn-default" do %>
+   <span>Compose</span><em class="fa fa-paper-plane fa-1x"></em><% end %>
+    <div class="spacer"></div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <%= render 'mailbox/folders' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-8">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <%= render partial: 'messages' %>
+      </div>
+  <div class="panel-footer">
+    <!-- reply form -->
+  <%= form_for :message, url: reply_conversation_path(conversation) do |f| %>
+    <div class="form-group">
+      <%= f.text_area :body, placeholder: "Reply message", rows: "2", class: "form-control" %>
+     </div>
+    <%= f.submit "Reply", class: "btn btn-default pull-right" %>
+  <% end %>
+  <div class="clearfix"></div>
+    </div>
+  </div>
+<div>
+
+<div>
+
+    </div>
+  </div>
+
+</div>
