@@ -1,7 +1,10 @@
 <h1 class="page-header">Profile</h1>
+  <% if user_signed_in? and @user.role.name == "Lecturer" %>
+     <div class="text-right"><%= link_to "See Courses", user_topics_path(@user.id), class: 'btn btn-large btn-default' %></div>
+                  <% end %>
   <div class="container">
     <div class="row profile">
-      <div class="col-md-3">
+      <div class="col-xs-4">
         <div class="profile-sidebar">
 	  <!-- SIDEBAR USERPIC -->
 	    <div class="profile-userpic">
@@ -11,7 +14,7 @@
 		<!-- SIDEBAR USER TITLE -->
 		<div class="profile-usertitle">
 		  <div class="profile-usertitle-name">
-		    <%= @user.name %>
+		    <h2 class="text-center"><%= @user.name %></h2>
 		  </div>
 		  <div class="profile-usertitle-job">
 		    <%= @user.role.name %>
@@ -19,14 +22,12 @@
                   <div class="profile-usertitle-job">
                     <%= pluralize(@user.microposts.count, "Status") %>
 		  </div>
-                   <div class="profile-usertitle-job">
+                  <div class="profile-usertitle-job">
  		    <%= render 'shared/stats' %>
                   </div>
                   <div class="profile-usertitle-job">
-                    <% if user_signed_in? and @user.role.name == "Lecturer" %>
-                    <%= link_to "See Courses", user_topics_path(@user.id) %>
-                    <% end %>
-                  </div>
+ 		    <%= link_to "Add Bio" if bio_lecturer? %>
+	 	  </div>
 <br />
 
          </div>
@@ -67,10 +68,10 @@
 		     </div>
 <!-- END MENU --></div>
 	</div>
-                <div class="col-md-9">
+                <div class="col-md-8">
                   <div class="profile-content">
                     <%= render 'follow_form' if user_signed_in? %>
-	            <% if  @user.microposts.any? %>
+                    <% if  @user.microposts.any? %>
                       <h3>Microposts (<%= @user.microposts.count %>)</h3><br />
                       <ol class="microposts" %>
                         <%= render @microposts %>

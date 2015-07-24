@@ -12,6 +12,14 @@ module ApplicationHelper
     current_user.role.name == "Lecturer"
   end
 
+  def bio_lecturer?
+    @user.role.name == "Lecturer"
+  end
+
+  def bio_student?
+    @user.role.name == "Student"
+  end
+
   def flash_class(type)
     case type.to_sym
       when :notice then "alert alert-success"
