@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   #Relationship
+  has_and_belongs_to_many :classrooms
   belongs_to :role
   has_many :topics
   has_many :units

@@ -8,15 +8,15 @@ module ApplicationHelper
     user == current_user
   end
 
+  def admin?
+    current_user.role.name == "Admin"
+  end
+
   def lecturer?
     current_user.role.name == "Lecturer"
   end
 
-  def bio_lecturer?
-    @user.role.name == "Lecturer"
-  end
-
-  def bio_student?
+  def student?
     @user.role.name == "Student"
   end
 

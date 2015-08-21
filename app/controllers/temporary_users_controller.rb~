@@ -1,0 +1,6 @@
+class TemporaryUsersController < ApplicationController
+
+  def temporary
+    @user = User.find_by_id([:id])
+  end
+end

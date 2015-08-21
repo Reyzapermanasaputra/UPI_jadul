@@ -1,4 +1,4 @@
-<%= form_for @user, :url => admin_users_path, :html => { :multipart => true} do |f| %>
+<%= form_for @user, :html => { :multipart => true} do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -14,21 +14,32 @@
     <%= f.label :photo %>
     <%= f.file_field :photo %>
   </div>
+
   <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name, placeholder: "Name", :style => "height: 30px;" %>
   </div>
+
   <div class="field">
     <%= f.label :email %><br>
     <%= f.email_field :email, placeholder: "Email", :style => "height: 30px;"%>
   </div>
+
   <div class="field">
     <%= f.label :password %><br>
     <%= f.password_field :password, placeholder: "Can't be blank", :style => "height: 30px;"  %>
   </div>
+
   <div class="field">
     <%= collection_select(:user, :role_id, Role.all, :id, :name, {prompt: true }) %>
   </div>
+  <% if student? and admin? %>
+  <div class="field">
+    <%= select_tag "adding_class", options_from_collection_for_select(Classroom.all, 'id',
+    'name', @user.classrooms.map{ |j| j.id })%>
+  </div>
+  <% end %>
+
   <div class="actions">
     <%= f.submit %>
   </div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150713223158) do
+ActiveRecord::Schema.define(version: 20150821065138) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,17 @@ ActiveRecord::Schema.define(version: 20150713223158) do
   add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
 
+  create_table "classrooms", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "classrooms_users", id: false, force: :cascade do |t|
+    t.integer "user_id",      null: false
+    t.integer "classroom_id", null: false
+  end
+
   create_table "comments", force: :cascade do |t|
     t.string   "content"
     t.integer  "commentable_id"
@@ -59,45 +70,6 @@ ActiveRecord::Schema.define(version: 20150713223158) do
   end
 
   add_index "contents", ["unit_id"], name: "index_contents_on_unit_id", using: :btree
-
-  create_table "courses", force: :cascade do |t|
-    t.string   "name_course"
-    t.string   "code_course"
-    t.string   "sks"
-    t.string   "program_study"
-    t.string   "semester"
-    t.string   "prerequisite"
-    t.string   "description"
-    t.integer  "user_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-  end
-
-  add_index "courses", ["user_id"], name: "index_courses_on_user_id", using: :btree
-
-  create_table "lecturers", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.inet     "current_sign_in_ip"
-    t.inet     "last_sign_in_ip"
-    t.string   "nip"
-    t.string   "name"
-    t.string   "place"
-    t.date     "born"
-    t.string   "work_unit"
-    t.string   "address"
-    t.string   "phone"
-    t.string   "role_id"
-  end
-
-  add_index "lecturers", ["email"], name: "index_lecturers_on_email", unique: true, using: :btree
-  add_index "lecturers", ["reset_password_token"], name: "index_lecturers_on_reset_password_token", unique: true, using: :btree
 
   create_table "mailboxer_conversation_opt_outs", force: :cascade do |t|
     t.integer "unsubscriber_id"

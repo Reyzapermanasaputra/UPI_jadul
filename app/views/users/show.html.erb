@@ -16,7 +16,12 @@
 		  <div class="profile-usertitle-name">
 		    <h2 class="text-center"><%= @user.name %></h2>
 		  </div>
-		  <div class="profile-usertitle-job">
+                  <div class="profile-usertitle-name">
+                   <% @room.each do |f| %>
+                       <%= f.name %>
+                   <% end %>
+		  </div>
+                  <div class="profile-usertitle-job">
 		    <%= @user.role.name %>
 		  </div>
                   <div class="profile-usertitle-job">
@@ -25,14 +30,15 @@
                   <div class="profile-usertitle-job">
  		    <%= render 'shared/stats' %>
                   </div>
-                  <div class="profile-usertitle-job">
-                  <% if bio_lecturer? %>
- 		    <%= link_to "Add Bio Lecturer" %>
-		  <% elsif %>
-		    <%= link_to "Add Bio Student" %>
-                  <% else %>
-		    <%= link_to "Add Bio Admin" %>
-		  <% end %>
+                    <div class="profile-usertitle-job">
+                      <% if student? and admin? %>
+                        <%= form_for @user, :url => {:action => "add_room"} do |f| %>
+ 		        <%= select_tag "adding_class",
+		       options_from_collection_for_select(Classroom.all, 'id',
+		       'name', @user.classrooms.map{ |j| j.id })%>
+                       <%= f.submit "add classroom", :class => "btn-btn-default"%>
+                       <% end %>
+		     <% end %>
 	 	  </div>
 <br />
 
@@ -40,8 +46,10 @@
 		<!-- END SIDEBAR USER TITLE -->
 		<!-- SIDEBAR BUTTONS -->
 		<div class="profile-userbuttons">
-		<%= link_to 'Edit', edit_user_path(@user), :class => "btn btn-success btn-sm" %>
-		<%= link_to 'Back', users_path, :class => "btn btn-danger btn-sm"%>
+                <% if admin? %>
+		<%= link_to 'Edit', edit_user_path(@user), :class => "btn btn-default" %>
+		<%= link_to 'Back', users_path, :class => "btn btn-default"%>
+                <% end %>
 		</div>
 		<!-- END SIDEBAR BUTTONS -->
 		<!-- SIDEBAR MENU -->

@@ -1,5 +1,5 @@
 body {
-  background-color:  #ffb347;
+  background-color: #fff;
   color: #333;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
@@ -13,18 +13,19 @@ p, ol, ul, td {
 }
 
 pre {
-  background-color: #08C;
+  background-color: #eee;
   padding: 10px;
   font-size: 11px;
 }
 
 a {
-  color: #08C;
+  color: #000;
   &:visited {
-    color: #08C;
+    color: #666;
   }
   &:hover {
-    color: #ffb347;
+    color: #fff;
+    background-color: #000;
   }
 }
 
@@ -35,7 +36,7 @@ div {
 }
 
 #notice {
-  color: blue;
+  color: green;
 }
 
 .field_with_errors {

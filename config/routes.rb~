@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :lecturers
+  patch "/users/:id", :to => 'users#add_room'
+  resources :classrooms
   root to: 'static_pages#home'
   get "mailbox/inbox" => "mailbox#inbox", as: :mailbox_inbox
   get "mailbox/sent" => "mailbox#sent", as: :mailbox_sent
