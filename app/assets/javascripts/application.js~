@@ -16,4 +16,6 @@
 //= require twitter/bootstrap
 //= require bootstrap
 //= require ckeditor/init
+//= require bootstrap-datepicker
+//= require locales/bootstrap-datetimepicker.<locale>
 //= require_tree .

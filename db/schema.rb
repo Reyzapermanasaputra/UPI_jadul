@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150821065138) do
+ActiveRecord::Schema.define(version: 20150822064632) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "assigments", force: :cascade do |t|
+    t.string   "title"
+    t.string   "due_time"
+    t.string   "description"
+    t.integer  "topic_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "assigments", ["topic_id"], name: "index_assigments_on_topic_id", using: :btree
 
   create_table "choices", force: :cascade do |t|
     t.string   "text"
@@ -52,6 +63,17 @@ ActiveRecord::Schema.define(version: 20150821065138) do
     t.integer "user_id",      null: false
     t.integer "classroom_id", null: false
   end
+
+  create_table "collection_assigments", force: :cascade do |t|
+    t.string   "attachment"
+    t.integer  "user_id"
+    t.integer  "assigment_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "collection_assigments", ["assigment_id"], name: "index_collection_assigments_on_assigment_id", using: :btree
+  add_index "collection_assigments", ["user_id"], name: "index_collection_assigments_on_user_id", using: :btree
 
   create_table "comments", force: :cascade do |t|
     t.string   "content"

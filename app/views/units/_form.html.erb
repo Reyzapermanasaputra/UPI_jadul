@@ -20,7 +20,7 @@
     <%= builder.label :title %>
     <%= builder.text_area :title, :rows => 1 %>
     <%= builder.label :body %>
-    <%= builder.cktext_area :body, :cols => 40, :ckeditor => {:uiColor => '#AADC6E', :toolbar => 'mini'} %>
+    <%= builder.cktext_area :body %>
     <%= builder.link_to_remove "Remove" %>
     <% end %>
     <%= f.link_to_add "Add Content", :contents %>

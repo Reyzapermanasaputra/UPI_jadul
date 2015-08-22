@@ -16,6 +16,10 @@ module ApplicationHelper
     current_user.role.name == "Lecturer"
   end
 
+  def current_student?
+    current_user.role.name == "Student"
+  end
+
   def student?
     @user.role.name == "Student"
   end

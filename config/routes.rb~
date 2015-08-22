@@ -37,9 +37,16 @@ Rails.application.routes.draw do
 	   post "choices/create"
 	   post "choices/destroy"
          end
+         resources :assigments do
+           resources :collection_assigments
+         end
          resources :units
          resources :questions
 end
+  resources :assigments do
+    resources :collection_assigments
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

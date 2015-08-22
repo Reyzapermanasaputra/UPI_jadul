@@ -12,6 +12,7 @@ gem 'cancancan', '~> 1.10'
 gem 'kaminari'
 gem 'mailboxer'
 gem 'tabulous'
+gem 'bootstrap-datepicker-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
 # Use postgresql as the database for Active Record

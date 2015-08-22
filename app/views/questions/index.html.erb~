@@ -1,12 +1,16 @@
+<% if current_student? %>
+  <%= controller.redirect_to quiz_topic_path(@topic) %>
+<% else %>
 <h1>Listing Question</h1>
 
 <p>Total : <%= @questions.size %> </p>
+<p>
 <nav>
   <ul class="pager">
   <li class="previous"><%= link_to 'New Question',new_topic_question_path%></li>
   </ul>
 </nav>
-
+</p>
 <table class="table table-stripped">
   <tr>
     <th>Text</th>
@@ -36,3 +40,4 @@
   <% end %>
   </table>
 <%= link_to 'back to courses', user_topics_path(current_user.id) %>
+<% end %>
