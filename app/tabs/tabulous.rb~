@@ -18,14 +18,6 @@ Tabulous.setup do
       active_when   { in_action('any').of_controller('assigments') }
     end
 
-    questions_tab do
-      text          { 'Questions' }
-      link_path     { topic_questions_path }
-      visible_when  { true }
-      enabled_when  { true }
-      active_when   { in_action('any').of_controller('questions') }
-    end
-
     quiz_tab do
       text          { 'Quiz' }
       link_path     { topic_questions_path }

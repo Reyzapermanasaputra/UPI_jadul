@@ -17,10 +17,8 @@
   <% @choices.each do |choice| %>
     <% if choice['correct'] %>
       <p class="correct feedback-choice">
-    <% elsif choice['correct'] == false %>
-      <p class="incorrect feedback-choice">
     <% else %>
-      <p class="feedback-choice">
+      <p class="incorrect feedback-choice">
     <% end %>
       <%= choice['text'] %>
     </p>
@@ -52,3 +50,4 @@
   </div>
 </div>
 </div>
+<%= controller.redirect_to question_quiz_topics_path %>
