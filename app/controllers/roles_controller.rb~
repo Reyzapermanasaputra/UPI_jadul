@@ -2,11 +2,20 @@ class RolesController < ApplicationController
   before_action :set_role, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
   load_and_authorize_resource
-
   # GET /roles
   # GET /roles.json
   def index
     @roles = Role.all
+  end
+
+  def get_role
+    result = "<option value="">--Select Role--</option><option value=""></option>"
+    role_id = params[:role_id]
+    @role = Role.where("role_id= #{role_id}").order("name ASC")
+    @role.each do |role|
+    result += <"option value='#{role.id}'>#{city.name}</option>"
+    end
+    render html: "#{result}".html_safe
   end
 
   # GET /roles/1

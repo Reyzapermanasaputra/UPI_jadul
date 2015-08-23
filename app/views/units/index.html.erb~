@@ -1,6 +1,7 @@
 <div class="panel panel-warning">
   <div class="panel-heading">
-    <h3 class="panel-title"><h2><%= @topic.level %></h4></h2>
+    <h3 class="panel-title"><h2><%= @topic.level %></h4></h2><br />
+    <h5> total watched <%= @count %></h5>
   </div>
  <% @units.each do |unit| %>
   <div class="panel-body">
@@ -37,6 +38,6 @@
 <% end %>
 <nav>
   <ul class="pager">
-  <li class="forward"><%= link_to 'Start Quiz', quiz_topics_path(@topi %></li>
+  <li class="forward"><%= link_to 'Start Quiz', quiz_topics_path(@topic) %></li>
   </ul>
 </nav>

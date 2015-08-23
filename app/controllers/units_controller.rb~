@@ -3,6 +3,7 @@ class UnitsController < ApplicationController
   def index
    @topic = Topic.find(params[:topic_id])
    @units = @topic.units.order('id ASC')
+   @count = count_session
   end
 
   def new

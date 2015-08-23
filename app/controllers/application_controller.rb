@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   end
 
   def conversation
-    @conversation ||= mailbox.conversations.find(params[:id])
+    @conversation ||= mailbox.conversations.find_by_id(params[:id])
   end
 
   protected
@@ -25,7 +25,5 @@ class ApplicationController < ActionController::Base
     flash[:error] = "Access denied!"
     redirect_to root_url
   end
-
-
 
 end
