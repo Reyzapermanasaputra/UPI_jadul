@@ -1,4 +1,4 @@
 class Assigment < ActiveRecord::Base
   belongs_to :topic
-  has_many :collection_assigments
+  has_many :collection_assigments, dependent: :destroy
 end

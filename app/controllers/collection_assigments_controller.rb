@@ -18,7 +18,7 @@ class CollectionAssigmentsController < ApplicationController
     if @collection.save
       redirect_to (:back), notice: 'Upload Success'
     else
-      flash[:error] = 'Upload Failed'
+      flash[:alert] = 'Upload Failed'
       redirect_to (:back)
     end
   end
@@ -27,6 +27,7 @@ class CollectionAssigmentsController < ApplicationController
     assigment = Assigment.find(params[:assigment_id])
     @collection = assigment.collection_assigments.find(params[:id])
     @collection.destroy
+    redirect_to (:back), notice: "Successfully Destroyed"
   end
 
   private

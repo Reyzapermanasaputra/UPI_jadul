@@ -14,6 +14,7 @@ class Ability
         can :manage, Content
         can :manage, Question
         can :manage, Assigment
+        can :manage, CollectionAssigment
       else
         can :read, Topic
         can :read, Unit

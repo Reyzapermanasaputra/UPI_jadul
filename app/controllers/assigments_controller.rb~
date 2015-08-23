@@ -6,6 +6,7 @@ class AssigmentsController < ApplicationController
   def index
     @topic = Topic.find(params[:topic_id])
     @assigments = @topic.assigments.order('id ASC')
+    @time = Today.now
   end
 
   # GET /assigments/1

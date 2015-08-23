@@ -1,6 +1,6 @@
 <br/><div class="panel panel-warning">
   <div class="panel-heading">
-    <h3 class="panel-title"><h2><%= @topic.level %></h4></h2>
+    <h4 class="panel-title"><h2><%= @topic.level %></h4></h2>
   </div>
 <%= tabs %>
  <% @units.each do |unit| %>
@@ -20,18 +20,6 @@
  <%= link_to 'Destroy', [unit.topic, unit], :confirm => 'Are you sure?', :method => :delete %>
 <% end %><hr />
   </div>
-<% end %>
-
-<% @topic.assigments.each do |assigment| %>
-  <div class="panel-body">
-<nav>
-  <ul class="pager">
-    <li class="previous"><%= link_to assigment.title, [assigment.topic, assigment] %>
-    </li>
-  </ul>
-</nav>
-<hr />
-</div>
 <% end %>
 
 </div>

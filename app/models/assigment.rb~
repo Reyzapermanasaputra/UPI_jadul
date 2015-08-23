@@ -1,6 +1,4 @@
 class Assigment < ActiveRecord::Base
   belongs_to :topic
   has_many :collection_assigments
-
-  validates_attachment_presence
 end
