@@ -1,0 +1,6 @@
+<h1>Editing Assigment</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', []@assigment.topic, @assigment] %> |
+<%= link_to 'Back', topic_assigments_path %>

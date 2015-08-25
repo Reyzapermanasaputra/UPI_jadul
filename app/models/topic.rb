@@ -1,7 +1,8 @@
 class Topic < ActiveRecord::Base
   has_many :units, :dependent => :destroy
-  has_many :questions, :dependent => :destroy
-  belongs_to :user, :dependent => :destroy
+  has_many :assigments, :dependent => :destroy
+  belongs_to :user
+  has_many :evaluations, :dependent => :destroy
   #file image upload
   has_attached_file :avatar, :style => { :medium => "120x100>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/

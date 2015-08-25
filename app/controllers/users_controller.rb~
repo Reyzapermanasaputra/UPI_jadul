@@ -8,10 +8,19 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def add_room
+    @user = User.find(params[:id])
+    @classrooms = Classroom.where(:id=> params[:adding_class])
+    @user.classrooms.destroy_all
+    @user.classrooms << @classrooms
+    redirect_to action: "show"
+  end
+
   # GET /users/1
   # GET /users/1.json
   def show
-    @user = User.find(params[:user_id])
+    @user = User.find(params[:id])
+    @room = @user.classrooms
     @microposts = @user.microposts.order('created_at DESC')
     @joined_on = @user.created_at.to_formatted_s(:short)
       if @user.current_sign_in_at
@@ -34,7 +43,6 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
@@ -49,6 +57,11 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    @user = User.find(params[:id])
+    @classrooms = Classroom.where(:id => params[:adding_class])
+    @user.classrooms.destroy_all
+    @user.classrooms << @classrooms
+
     if user_params[:password].blank?
     user_params.delete(:password)
     user_params.delete(:password_confirmation)

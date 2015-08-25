@@ -1,12 +1,13 @@
-<h1>Listing Question</h1>
-
-<p>Total : <%= @questions.size %> </p>
+<% if current_student? %>
+  <%= controller.redirect_to quiz_topics_path(@topic) %>
+<% else %>
+<p>
 <nav>
   <ul class="pager">
-  <li class="previous"><%= link_to 'New Question',new_topic_question_path%></li>
+
   </ul>
 </nav>
-
+</p>
 <table class="table table-stripped">
   <tr>
     <th>Text</th>
@@ -16,7 +17,7 @@
     <th></th>
   </tr>
 
-<% @questions.each do |question| %>
+<% @evaluation.questions.each do |question| %>
   <tr>
     <td><%= question.text %></td>
     <td>
@@ -29,10 +30,11 @@
       <% end %>
       </ul>
     </td>
-    <td><%= link_to 'add choices', [question.topic, question] %></td>
-    <td><%= link_to 'edit', edit_topic_question_path(question.topic, question) %></td>
-    <td><%= link_to 'Destroy', [question.topic, question], :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'add choices', [@evaluation.topic, question.evaluation, question] %></td>
+    <td><%= link_to 'edit', edit_topic_evaluation_question_path(@evaluation.topic, question.evaluation, question) %></td>
+    <td><%= link_to 'Destroy', [@evaluation.topic, question.evaluation], :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
   <% end %>
   </table>
-<%= link_to 'back to courses', user_topics_path(current_user.id) %>
+  <%= link_to "New Questions", new_topic_evaluation_question_path(@evaluation.topic, @evaluation, @question), class: "btn btn-default" %>
+<% end %>

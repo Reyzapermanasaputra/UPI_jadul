@@ -1,29 +1,35 @@
 class QuestionsController < ApplicationController
+  load_and_authorize_resource except: :create
   def index
     @topic = Topic.find(params[:topic_id])
-    @questions = @topic.questions.order('id ASC')
+    @evaluation = @topic.evaluations.find(params[:evaluation_id])
+    @questions = @evaluation.questions
   end
 
   def show
     @topic = Topic.find(params[:topic_id])
-    @question = @topic.questions.find(params[:id])
+    @evaluation = @topic.evaluations.find(params[:evaluation_id])
+    @question = @evaluation.questions.find(params[:id])
   end
 
   def new
     @topic = Topic.find(params[:topic_id])
-    @question = @topic.questions.build
+    @evaluation = @topic.evaluations.find(params[:evaluation_id])
+    @question = @evaluation.questions.build
   end
 
   def edit
     @topic = Topic.find(params[:topic_id])
-    @question = @topic.questions.find(params[:id])
+    @evaluation = @topic.evaluations.find(params[:evaluation_id])
+    @question = @evaluation.questions.find(params[:id])
   end
 
   def update
     @topic = Topic.find(params[:topic_id])
-    @question = @topic.questions.find(params[:id])
-    if Question.update_attributes(params_question)
-      redirect_to topic_questions_url, :notice => "Successfully"
+    @evaluation = @topic.evaluations.find(params[:evaluation_id])
+    @question = @evaluation.questions.find(params[:id])
+    if @question.update_attributes(params_question)
+      redirect_to [@topic, @evaluation], :notice => "Successfully"
     else
       render 'new'
     end
@@ -31,9 +37,10 @@ class QuestionsController < ApplicationController
 
   def create
     @topic = Topic.find(params[:topic_id])
-    @question = @topic.questions.create(params_question)
+    @evaluation = @topic.evaluations.find(params[:evaluation_id])
+    @question = @evaluation.questions.create(params_question)
     if @question.save
-      redirect_to topic_question_url(@question.id), :notice => "Successfully"
+      redirect_to [@topic, @evaluation], :notice => "Successfully"
     else
       render 'new'
     end
@@ -41,9 +48,10 @@ class QuestionsController < ApplicationController
 
   def destroy
     @topic = Topic.find(params[:topic_id])
-    @question = @topic.questions.find(params[:id])
+    @evaluation = @topic.evaluations.find(params[:evaluation_id])
+    @question = @evaluation.questions.find(params[:id])
     @question.destroy
-    redirect_to topic_questions_url, :notice => "Successfully"
+    redirect_to [@topic, @evaluation], :notice => "Successfully"
   end
 
   private

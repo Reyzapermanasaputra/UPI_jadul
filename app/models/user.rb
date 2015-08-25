@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   #Relationship
+  has_many :collection_assigments
+  has_and_belongs_to_many :classrooms
   belongs_to :role
   has_many :topics
   has_many :units
@@ -58,10 +60,6 @@ class User < ActiveRecord::Base
 
   def student?
     self.role.name == "Student"
-  end
-
-  def guess?
-    self.role.name == "Guess"
   end
 
   #Messaging

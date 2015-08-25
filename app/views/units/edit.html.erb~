@@ -5,4 +5,4 @@
 
  <%= render 'form' %>
 
- <%= link_to "Cancel", topic_comments_path(@unit.topic), class: "btn btn_danger" %>
+ <%= link_to "Cancel", topic_units_path(@unit.topic), class: "btn btn_danger" %>

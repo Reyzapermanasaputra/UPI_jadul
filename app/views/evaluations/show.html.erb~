@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @evaluation.name %>
+</p>
+
+<p>
+  <strong>Password:</strong>
+  <%= @evaluation.password %>
+</p>
+
+<ol>
+<% for question in @evaluation.questions %>
+  <li><%= h question.text %></li>
+  <ul>
+    <% for choice in question.choices %>
+    <li><%= h choice.text %></li>
+    <% end %>
+  </ul>
+<% end %>
+</ol>
+
+
+
+
+
+
+<%# render template: "questions/index" %>
+<br />
+<br />
+<%= link_to 'Edit', edit_topic_evaluation_path(@evaluation.topic, @evaluation) %> |
+<%= link_to 'Back', topic_evaluations_path %>
+
+<%#link_to "Add Question", topic_evaluation_questions_path(@evaluation.topic,  @evaluation, @questions) if deep level resources %>

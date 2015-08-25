@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150713223158) do
+ActiveRecord::Schema.define(version: 20150824041606) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "assigments", force: :cascade do |t|
+    t.string   "title"
+    t.string   "due_time"
+    t.string   "description"
+    t.integer  "topic_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "assigments", ["topic_id"], name: "index_assigments_on_topic_id", using: :btree
 
   create_table "choices", force: :cascade do |t|
     t.string   "text"
@@ -41,6 +52,28 @@ ActiveRecord::Schema.define(version: 20150713223158) do
 
   add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
+
+  create_table "classrooms", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "classrooms_users", id: false, force: :cascade do |t|
+    t.integer "user_id",      null: false
+    t.integer "classroom_id", null: false
+  end
+
+  create_table "collection_assigments", force: :cascade do |t|
+    t.string   "attachment"
+    t.integer  "user_id"
+    t.integer  "assigment_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "collection_assigments", ["assigment_id"], name: "index_collection_assigments_on_assigment_id", using: :btree
+  add_index "collection_assigments", ["user_id"], name: "index_collection_assigments_on_user_id", using: :btree
 
   create_table "comments", force: :cascade do |t|
     t.string   "content"
@@ -74,6 +107,16 @@ ActiveRecord::Schema.define(version: 20150713223158) do
   end
 
   add_index "courses", ["user_id"], name: "index_courses_on_user_id", using: :btree
+
+  create_table "evaluations", force: :cascade do |t|
+    t.string   "name"
+    t.string   "password"
+    t.integer  "topic_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "evaluations", ["topic_id"], name: "index_evaluations_on_topic_id", using: :btree
 
   create_table "lecturers", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -163,10 +206,12 @@ ActiveRecord::Schema.define(version: 20150713223158) do
 
   create_table "questions", force: :cascade do |t|
     t.string   "text"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "topic_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "evaluation_id"
   end
+
+  add_index "questions", ["evaluation_id"], name: "index_questions_on_evaluation_id", using: :btree
 
   create_table "relationships", force: :cascade do |t|
     t.integer  "follower_id"
@@ -231,3 +276,17 @@ ActiveRecord::Schema.define(version: 20150713223158) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["role_id"], name: "index_users_on_role_id", using: :btree
 
+  add_foreign_key "assigments", "topics", name: "assigments_topic_id_fk"
+  add_foreign_key "choices", "questions", name: "choices_question_id_fk"
+  add_foreign_key "collection_assigments", "assigments", name: "collection_assigments_assigment_id_fk"
+  add_foreign_key "collection_assigments", "users", name: "collection_assigments_user_id_fk"
+  add_foreign_key "contents", "units"
+  add_foreign_key "courses", "lecturers", column: "user_id"
+  add_foreign_key "evaluations", "topics"
+  add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"
+  add_foreign_key "mailboxer_notifications", "mailboxer_conversations", column: "conversation_id", name: "notifications_on_conversation_id"
+  add_foreign_key "mailboxer_receipts", "mailboxer_notifications", column: "notification_id", name: "receipts_on_notification_id"
+  add_foreign_key "microposts", "users"
+  add_foreign_key "questions", "evaluations"
+  add_foreign_key "users", "roles"
+end

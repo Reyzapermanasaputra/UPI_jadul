@@ -1,0 +1,10 @@
+<div class="input-group input-group-lg">
+  <%= f.text_area :text, placeholder: "Question", class: "form-control" %>
+  <%= f.link_to_remove "Remove Question" %>
+</div><br/>
+
+  <%= f.fields_for :choices do |builder| %>
+    <%= render "answer_field", :f => builder %>
+  <% end %>
+
+  <p><%= f.link_to_add "Add Answer", :choices %></p>

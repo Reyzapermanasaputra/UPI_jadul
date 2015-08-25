@@ -1,7 +1,8 @@
-<div class="panel panel-warning">
+<br/><div class="panel panel-warning">
   <div class="panel-heading">
     <h3 class="panel-title"><h2><%= @topic.level %></h4></h2><br />
   </div>
+<%= tabs %>
  <% @units.each do |unit| %>
   <div class="panel-body">
 <nav>
@@ -20,6 +21,7 @@
 <% end %><hr />
   </div>
 <% end %>
+
 </div>
 <% if can? :create, Unit %>
 <nav>
@@ -28,15 +30,4 @@
      </li>
   </ul>
 </nav>
-
-<nav>
-  <ul class="pager">
-  <li class="previous"><%= link_to 'Question Bank',topic_questions_path%></li>
-  </ul>
-</nav>
 <% end %>
-<nav>
-  <ul class="pager">
-  <li class="forward"><%= link_to 'Start Quiz', quiz_topics_path(@topic) %></li>
-  </ul>
-</nav>

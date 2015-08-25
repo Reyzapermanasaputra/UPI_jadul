@@ -2,60 +2,28 @@ Tabulous.setup do
 
   tabs do
 
-    conversations_tab do
-      text          { 'Conversations' }
-      link_path     { conversations_path }
+    units_tab do
+      text          { 'Material' }
+      link_path     { topic_units_path }
       visible_when  { true }
       enabled_when  { true }
-      active_when   { in_action('any').of_controller('conversations') }
+      active_when   { in_action('any').of_controller('units') }
     end
 
-    topics_tab do
-      text          { 'Topics' }
-      link_path     { topics_path }
+    assigments_tab do
+      text          { 'Assigments' }
+      link_path     { topic_assigments_path }
       visible_when  { true }
       enabled_when  { true }
-      active_when   { in_action('any').of_controller('topics') }
-    end
-
-    users_tab do
-      text          { 'Users' }
-      link_path     { users_path }
-      visible_when  { true }
-      enabled_when  { true }
-      active_when   { in_action('any').of_controller('users') }
-    end
-
-    roles_tab do
-      text          { 'Roles' }
-      link_path     { roles_path }
-      visible_when  { true }
-      enabled_when  { true }
-      active_when   { in_action('any').of_controller('roles') }
-    end
-
-    questions_tab do
-      text          { 'Questions' }
-      link_path     { questions_path }
-      visible_when  { true }
-      enabled_when  { true }
-      active_when   { in_action('any').of_controller('questions') }
+      active_when   { in_action('any').of_controller('assigments') }
     end
 
     quiz_tab do
       text          { 'Quiz' }
-      link_path     { quiz_index_path }
+      link_path     { topic_questions_path }
       visible_when  { true }
       enabled_when  { true }
       active_when   { in_action('any').of_controller('quiz') }
-    end
-
-    units_tab do
-      text          { 'Units' }
-      link_path     { "" }
-      visible_when  { true }
-      enabled_when  { true }
-      active_when   { in_action('any').of_controller('units') }
     end
 
   end
@@ -90,7 +58,7 @@ Tabulous.setup do
   # This scaffolding should be turned off and replaced by your own custom
   # CSS before using tabulous in production.
   use_css_scaffolding do
-    background_color '#ccc'
+    background_color '#fff'
     text_color '#444'
     active_tab_color '#fff'
     hover_tab_color '#ddd'

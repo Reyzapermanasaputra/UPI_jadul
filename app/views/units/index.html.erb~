@@ -1,8 +1,13 @@
-<div class="panel panel-warning">
+<br/><div class="panel panel-warning">
   <div class="panel-heading">
+<<<<<<< HEAD
     <h3 class="panel-title"><h2><%= @topic.level %></h4></h2><br />
     <h5> total watched <%= @count %></h5>
+=======
+    <h4 class="panel-title"><h2><%= @topic.level %></h4></h2>
+>>>>>>> 4447194c288ccee252a38839996f5c5c4c6c3fe3
   </div>
+<%= tabs %>
  <% @units.each do |unit| %>
   <div class="panel-body">
 <nav>
@@ -21,6 +26,7 @@
 <% end %><hr />
   </div>
 <% end %>
+
 </div>
 <% if can? :create, Unit %>
 <nav>
@@ -29,15 +35,12 @@
      </li>
   </ul>
 </nav>
-
-<nav>
-  <ul class="pager">
-  <li class="previous"><%= link_to 'Question Bank',topic_questions_path%></li>
-  </ul>
-</nav>
 <% end %>
+<<<<<<< HEAD
 <nav>
   <ul class="pager">
   <li class="forward"><%= link_to 'Start Quiz', quiz_topics_path(@topic) %></li>
   </ul>
 </nav>
+=======
+>>>>>>> 4447194c288ccee252a38839996f5c5c4c6c3fe3

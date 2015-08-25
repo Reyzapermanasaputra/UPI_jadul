@@ -1,0 +1,35 @@
+<%= form_for([@assigment.topic, @assigment]) do |f| %>
+  <% if @assigment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@assigment.errors.count, "error") %> prohibited this assigment from being saved:</h2>
+
+      <ul>
+      <% @assigment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div class="input-group input-group-lg">
+  <%= f.text_field :title, :placeholder => "Title", :class => "form-control" %>
+</div><br />
+
+  <div class="input-group input-group-lg">
+    <%= f.text_field :due_time, 'data-behaviour' => 'datepicker', :placeholder => "Due Time", :class => "form-control"%>
+  </div> <br/>
+
+  <div class="input-group input-group-lg">
+    <%= f.cktext_area :description, :placeholder => "Description", :class => "form-control" %>
+  </div>
+
+  <div class="field">
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Create Task", :class => "btn-btn-default" %>
+  </div>
+
+<script type="text/javascript">
+  $('[data-behaviour~=datepicker]').datepicker();
+</script>
+<% end %>

@@ -1,1 +1,4 @@
 <h1> Editing Question </h1>
+
+<%= render 'form'%>
+<%= link_to 'Back', topic_evaluation_path(@evaluation.topic, @evaluation) %>

@@ -1,0 +1,89 @@
+class EvaluationsController < ApplicationController
+  before_action :set_evaluation, only: [:show, :edit, :update, :destroy]
+
+  # GET /evaluations
+  # GET /evaluations.json
+  def index
+    @topic = Topic.find(params[:topic_id])
+    @evaluations = @topic.evaluations.order('id ASC')
+  end
+
+  # GET /evaluations/1
+  # GET /evaluations/1.json
+  def show
+     @topic = Topic.find(params[:topic_id])
+     @evaluation = @topic.evaluations.find(params[:id])
+
+  end
+
+  # GET /evaluations/new
+  def new
+    @topic = Topic.find(params[:topic_id])
+    @evaluation = @topic.evaluations.new
+    1.times do
+      question = @evaluation.questions.build
+      4.times { question.choices.build }
+    end
+  end
+
+  # GET /evaluations/1/edit
+  def edit
+    @topic = Topic.find(params[:topic_id])
+    @evaluation = @topic.evaluations.find(params[:id])
+  end
+
+  # POST /evaluations
+  # POST /evaluations.json
+  def create
+    @topic = Topic.find(params[:topic_id])
+    @evaluation = @topic.evaluations.create(evaluation_params)
+
+    respond_to do |format|
+      if @evaluation.save
+        format.html { redirect_to topic_evaluations_url, notice: 'Evaluation was successfully created.' }
+      else
+        format.html { render :new }
+      end
+    end
+  end
+
+  # PATCH/PUT /evaluations/1
+  # PATCH/PUT /evaluations/1.json
+  def update
+    @topic = Topic.find(params[:topic_id])
+    @evaluation = @topic.evaluations.find(params[:id])
+    respond_to do |format|
+      if @evaluation.update_attributes(evaluation_params)
+        format.html { redirect_to topic_evaluations_path, notice: 'Evaluation was successfully updated.' }
+        format.json { render :show, status: :ok, location: @evaluation }
+      else
+        format.html { render :edit }
+        format.json { render json: @evaluation.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /evaluations/1
+  # DELETE /evaluations/1.json
+  def destroy
+    @topic = Topic.find(params[:topic_id])
+    @evaluation = @topic.evaluations.find(params[:id])
+    @evaluation.destroy
+    respond_to do |format|
+      format.html { redirect_to topic_evaluations_url, notice: 'Evaluation was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_evaluation
+      @topic = Topic.find(params[:topic_id])
+      @evaluation = @topic.evaluations.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def evaluation_params
+      params.require(:evaluation).permit(:name, :password, :topic_id, :questions_attributes => [:id, :text, :_destroy, :choices_attributes =>[:id, :text, :_destroy]])
+    end
+end

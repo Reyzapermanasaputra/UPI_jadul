@@ -16,7 +16,5 @@
 //= require twitter/bootstrap
 //= require bootstrap
 //= require ckeditor/init
+//= require bootstrap-datepicker
 //= require_tree .
-$('.timeline-panel').click(function() {
-    $('.timeline-body', this).toggle(); // p00f
-});

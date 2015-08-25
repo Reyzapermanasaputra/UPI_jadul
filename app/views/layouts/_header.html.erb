@@ -33,10 +33,10 @@
                   <ul class="dropdown-menu">
                     <li><%= current_user.name %></li>
                     <% if user_signed_in? and current_user.role.name=="Admin" %>
-		    <li><%= link_to "Manage User", users_path %></li>
-                    <li><%= link_to "Manage Role", roles_path %></li>
+		    <li><%= link_to "Manage User", users_path, :class => "btn btn-default" %></li>
+                    <li><%= link_to "Manage Role", roles_path, :class => "btn btn-default" %></li>
+		    <li><%= link_to "Manage Classroom", classrooms_path, :class => "btn btn-default" %></li>
                     <% end %>
-                    <li><%= link_to "Edit Profile", edit_user_registration_path %>
                     </li>
                     <li><%= link_to destroy_user_session_path, :method => :delete do %>
                     <em class="fa fa-power-off fa-1x"></em><span>Logout</span>

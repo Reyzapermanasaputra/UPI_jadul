@@ -28,4 +28,3 @@
 <li class="previous"><%= link_to 'Back', topic_units_path(@unit.topic)%></li>
   </ul>
 </nav>
-<% render template: "comments/index" %>

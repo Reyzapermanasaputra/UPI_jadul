@@ -1,0 +1,22 @@
+<div class="well">
+  <%= form_for([@collection_assigment.assigment, @collection]), html: {multipart: true} do |f| %>
+  <% if @collection_assigment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@collection_assigment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+      <ul>
+      <% @collection_assigment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :attachment %><br />
+    <%= f.file_field :attachment %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

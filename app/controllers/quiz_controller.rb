@@ -1,4 +1,7 @@
 class QuizController < ApplicationController
+http_basic_authenticate_with name: "rey", password: "test", only: :start
+
+
   def index
     @topic = Topic.find(params[:id])
     @question = @topic.questions.new
@@ -52,6 +55,7 @@ class QuizController < ApplicationController
 	 end
 
          session[:current] += 1
+
   end
 
   def end
