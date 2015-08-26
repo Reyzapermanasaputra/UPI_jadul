@@ -1,0 +1,49 @@
+<br />
+<br />
+<div class="row">
+  <div class="spacer"></div>
+  <div class="col-xs-12">
+  <div class="spacer"></div>
+</div>
+<div class="col-xs-8">
+  <div class="panel panel-default">
+    <div class="panel-body">
+<h2><p id="question">
+<ol>
+<%= form_for [@quiz.evaluation, @quiz], url: answer_quizzes_topic_evaluations_path , multiple: true do |f| %>
+
+<% for question in @evaluation.questions %>
+
+  <li><%= h question.text %></li>
+  <%= f.fields_for :tasks do |task_form| %>
+  <% for choice in question.choices %>
+    <p class="choice">
+      <%= task_form.radio_button :answer, "choice.text" %>
+      <%= f.label "choice_".concat(choice.id.to_s).to_sym, choice.text %>
+    </p>
+  <% end %>
+  <% unless question.choices.any? %>
+     <br />
+     <div class="form-group">
+
+      <p>
+        Task: <%= task_form.text_field :answer %>
+      </p>
+  <% end %>
+    </div>
+  <% end %>
+<% end %>
+</ol></h2>
+    <p><%= submit_tag "Create Project" %></p>
+<% end %>
+</div>
+</div>
+</div>
+<div class="col-md-4">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h2><p id="question"> Total Questions <%= @evaluation.questions.size %></p></h3>
+    </div>
+  </div>
+</div>
+</div>

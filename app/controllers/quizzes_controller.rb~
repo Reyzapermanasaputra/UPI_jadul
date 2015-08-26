@@ -1,4 +1,4 @@
-class QuizController < ApplicationController
+class QuizzesController < ApplicationController
 http_basic_authenticate_with name: "rey", password: "test", only: :start
 
 
@@ -26,7 +26,10 @@ http_basic_authenticate_with name: "rey", password: "test", only: :start
 
          @topic = Topic.find(params[:topic_id])
          @evaluation = @topic.evaluations.find(params[:id])
-	 @question = @evaluation.questions
+
+         @question = @evaluation.questions.count
+         @quiz = @evaluation.quizzes.new
+         1.times { @quiz.tasks.build }
 
 
 	 session[:question] = @question
@@ -34,22 +37,30 @@ http_basic_authenticate_with name: "rey", password: "test", only: :start
   end
 
   def answer
+    @evaluation = Evaluation.find(params[:id])
+    @quiz = @evaluation.quizzes.new(quiz_params)
+    @quiz.user_id = current_user.id
+    if @quiz.save
+      redirect_to [@evaluation.topic, @evaluation], notice: "Thank a lot"
+    else
+      flash[:danger] = "quiz failed"
+      redirect_to (:back)
+    end
 	 #@current = session[:current]
 	 #@total   = session[:total]
+	 #choiceid = params[:choice]
 
-	 choiceid = params[:choice]
+	 #@question = session[:question]
+	 #@choices  = session[:choices]
 
-	 @question = session[:question]
-	 @choices  = session[:choices]
-
-	 @choice = choiceid ? Choice.find(choiceid) : nil
-	 if @choice and @choice.correct
-		@correct = true
-		session[:correct] = 1
-	 else
-		@correct = false
-	 end
-         redirect_to action: "end"
+	# @choice = choiceid ? Choice.find(choiceid) : nil
+	 #if @choice and @choice.correct
+	#	@correct = true
+	#	session[:correct] = 1
+	# else
+	#	@correct = false
+	# end
+       #  redirect_to action: "end"
 
   end
 
@@ -58,5 +69,10 @@ http_basic_authenticate_with name: "rey", password: "test", only: :start
 	 @total   = session[:total]
 
 	 @score = @correct * 100 / @total
+  end
+  private
+
+  def quiz_params
+    params.require(:quiz).permit(:id, :user_id, :evaluation_id, :tasks_attributes =>[:id, :question_id,  :answer, :_destroy])
   end
 end

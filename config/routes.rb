@@ -28,22 +28,20 @@ Rails.application.routes.draw do
 
   mount Ckeditor::Engine => '/ckeditor'
      resources :topics do
-          collection do
-	   get "/:id/quiz", :to => 'quiz#index', as: :quiz
-           post "/:id/quiz", :to => 'quiz#start'
-           get "/:id/quiz/question", :to => 'quiz#question', as: :question_quiz
- 	   post "/:id/quiz/question", :to => 'quiz#question'
-	   post "/:id/quiz/answer", :to => 'quiz#answer', as: :answer_quiz
-	   get "/:id/quiz/end", :to => 'quiz#end'
-	   post "choices/create"
-	   post "choices/destroy"
-         end
          resources :assigments do
            resources :collection_assigments
          end
          resources :units
          resources :evaluations do
-         resources :questions
+           resources :quizzes
+          collection do
+	   get "/:id/evaluations/quizzes", :to => 'quizzes#index', as: :quizzes
+           post "/quizzes/start", :to => 'quizzes#start'
+           get "/:id/quizzez/question", :to => 'quizzes#question', as: :question_quizzes
+ 	   post "/:id/quizzes/question", :to => 'quizzes#question'
+	   post "/:id/quizzes/answer", :to => 'quizzes#answer', as: :answer_quizzes
+	   get "/:id/quizzes/end", :to => 'quizzes#end'
+         end
          end
 end
   resources :assigments do

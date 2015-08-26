@@ -7,16 +7,16 @@
     <tr>
       <th>Name</th>
       <th>Password</th>
+      <th>Action</th>
       <th colspan="3"></th>
     </tr>
   </thead>
-
   <tbody>
     <% @evaluations.each do |evaluation| %>
       <tr>
         <td><%= evaluation.name %></td>
         <td><%= evaluation.password %></td>
-        <td><%= link_to 'Add Question', [evaluation.topic, evaluation] %></td>
+        <td><%= link_to 'Show', [evaluation.topic, evaluation] %></td>
         <td><%= link_to 'Edit', edit_topic_evaluation_path(evaluation.topic, evaluation) %></td>
         <td><%= link_to 'Destroy', [evaluation.topic, evaluation], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

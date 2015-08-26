@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150824041606) do
+ActiveRecord::Schema.define(version: 20150826080953) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -213,6 +213,19 @@ ActiveRecord::Schema.define(version: 20150824041606) do
 
   add_index "questions", ["evaluation_id"], name: "index_questions_on_evaluation_id", using: :btree
 
+  create_table "quizzes", force: :cascade do |t|
+    t.string   "answer"
+    t.integer  "user_id"
+    t.integer  "evaluation_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "question_id"
+  end
+
+  add_index "quizzes", ["evaluation_id"], name: "index_quizzes_on_evaluation_id", using: :btree
+  add_index "quizzes", ["question_id"], name: "index_quizzes_on_question_id", using: :btree
+  add_index "quizzes", ["user_id"], name: "index_quizzes_on_user_id", using: :btree
+
   create_table "relationships", force: :cascade do |t|
     t.integer  "follower_id"
     t.integer  "followed_id"
@@ -230,6 +243,17 @@ ActiveRecord::Schema.define(version: 20150824041606) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  create_table "tasks", force: :cascade do |t|
+    t.integer  "question_id"
+    t.string   "answer"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "quiz_id"
+  end
+
+  add_index "tasks", ["question_id"], name: "index_tasks_on_question_id", using: :btree
+  add_index "tasks", ["quiz_id"], name: "index_tasks_on_quiz_id", using: :btree
 
   create_table "topics", force: :cascade do |t|
     t.string   "level"
@@ -288,5 +312,10 @@ ActiveRecord::Schema.define(version: 20150824041606) do
   add_foreign_key "mailboxer_receipts", "mailboxer_notifications", column: "notification_id", name: "receipts_on_notification_id"
   add_foreign_key "microposts", "users"
   add_foreign_key "questions", "evaluations"
+  add_foreign_key "quizzes", "evaluations"
+  add_foreign_key "quizzes", "questions"
+  add_foreign_key "quizzes", "users"
+  add_foreign_key "tasks", "questions"
+  add_foreign_key "tasks", "quizzes"
   add_foreign_key "users", "roles"
 end

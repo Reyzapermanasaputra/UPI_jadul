@@ -15,6 +15,6 @@ class ChoicesController < ApplicationController
 	 @question = Question.find(params[:question])
 	 @choice = Choice.find(params[:choice])
 	 @choice.destroy
-	 redirect_to topic_question_path(@question.id)
+	 redirect_to :back
   end
 end
