@@ -8,6 +8,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+
 <%= render 'layouts/header' %>
 <% flash.each do |type, msg| %><br>
   <div class="alert <%= flash_class type %> alert-dismissable">

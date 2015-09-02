@@ -1,0 +1,7 @@
+class ChangeColumnsToUsers < ActiveRecord::Migration
+  def change
+    change_column :users do |t|
+    t.rename :Phone, :phone
+    t.rename :Address, :address
+  end
+end

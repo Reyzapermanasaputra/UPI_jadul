@@ -1,11 +1,13 @@
 <h1 class="page-header">Profile</h1>
-  <% if user_signed_in? and @user.role.name == "Lecturer" %>
-     <div class="text-right"><%= link_to "See Courses", user_topics_path(@user.id), class: 'btn btn-large btn-default' %></div>
-                  <% end %>
   <div class="container">
     <div class="row profile">
-      <div class="col-xs-4">
+      <div class="col-md-4">
         <div class="profile-sidebar">
+          <div class="panel panel-info">
+          <div class="panel panel-heading">
+           profile
+          </div>
+          <div class="panel-body">
 	  <!-- SIDEBAR USERPIC -->
 	    <div class="profile-userpic">
             <%= image_tag @user.photo.url, :width => 100, :height => 120, :crop => :fill, :class => "avatar img-circle img-thumbnail", :alt => "", :class => "img-responsive" %>
@@ -13,44 +15,36 @@
 		<!-- END SIDEBAR USERPIC -->
 		<!-- SIDEBAR USER TITLE -->
 		<div class="profile-usertitle">
-		  <div class="profile-usertitle-name">
-		    <h2 class="text-center"><%= @user.name %></h2>
-		  </div>
+		      <p class="lead">
+                      <blockquote>
+                      <p> <%= @user.name %></p>
+                      <small>
+                        <cite title="Source Title">12302160
+                      </small>
+                     </blockquote>
+                      </p>
+                    </h2>
+
+                   <div class="profile-usertitle-job">
+                 <% if student? and admin? %>
+                   <%= form_for @user, :url => {:action => "add_room"} do |f| %>
+                  <%= select_tag "adding_class",
+	          options_from_collection_for_select(Classroom.all, 'id',
+                  'name', @user.classrooms.map{ |j| j.id })%>
+                  <%= f.submit "add classroom", :class => "btn-btn-default"%>
+                <% end %>
+                <% end %>
+	 	  </div>
                   <div class="profile-usertitle-name">
                    <% @room.each do |f| %>
-                       <%= f.name %>
+                     <span class="content">
+                     <p class="lead"><%= f.name %></p>
+                     </span>
                    <% end %>
 		  </div>
                   <div class="profile-usertitle-job">
-		    <%= @user.role.name %>
+                       <p class="lead"><%= @user.role.name %></p>
 		  </div>
-                  <div class="profile-usertitle-job">
-                    <%= pluralize(@user.microposts.count, "Status") %>
-		  </div>
-                  <div class="profile-usertitle-job">
- 		    <%= render 'shared/stats' %>
-                  </div>
-<<<<<<< HEAD
-                  <div class="profile-usertitle-job">
-                  <% if bio_lecturer? %>
- 		    <%= link_to "Add Bio Lecturer" %>
-		  <% elsif %>
-		    <%= link_to "Add Bio Student" %>
-                  <% else %>
-		    <%= link_to "Add Bio Admin" %>
-		  <% end %>
-=======
-                    <div class="profile-usertitle-job">
-                      <% if student? and admin? %>
-                        <%= form_for @user, :url => {:action => "add_room"} do |f| %>
- 		        <%= select_tag "adding_class",
-		       options_from_collection_for_select(Classroom.all, 'id',
-		       'name', @user.classrooms.map{ |j| j.id })%>
-                       <%= f.submit "add classroom", :class => "btn-btn-default"%>
-                       <% end %>
-		     <% end %>
->>>>>>> 4447194c288ccee252a38839996f5c5c4c6c3fe3
-	 	  </div>
 <br />
 
          </div>
@@ -67,9 +61,7 @@
 		<div class="profile-usermenu">
 		  <ul class="nav">
 		    <li class="active">
-                    <% if @course_item %>
-                      <%= link_to "Courses", user_courses_path(@user.id) %>
-                    <% end %>
+
 		    <a href="#">
 		     <i class="glyphicon glyphicon-home"></i>
 		       <%= @user.email %> </a>
@@ -91,22 +83,65 @@
 		     </li>
 		     </ul>
 		     </div>
+                     </div>
+                     </div>
 <!-- END MENU --></div>
 	</div>
                 <div class="col-md-8">
                   <div class="profile-content">
-                    <%= render 'follow_form' if user_signed_in? %>
-                    <% if  @user.microposts.any? %>
-                      <h3>Microposts (<%= @user.microposts.count %>)</h3><br />
+                   <div class="col-xs-12 divider text-center">
+                  <% if user_signed_in? and @user.role.name == "Lecturer" %>
+                   <div class="col-xs-12 col-sm-4 emphasis">
+                      <h2><strong><%= @user.topics.size %></strong></h2>
+                      <p><small>Courses</small></p>
+                      <%= link_to "See Courses", user_topics_path(@user.id), class:"btn btn-default btn-block" %>
+                  </div>
+                  <% else %>
+                   <div class="col-xs-12 col-sm-4 emphasis">
+                      <h2><strong><%=@user.microposts.count%></strong></h2>
+                      <p><small>Posts</small></p>
+                      <button class="btn btn-default btn-block">
+                      <span class="fa fa-user"></span>
+                        Post
+                      </button>
+                  </div>
+                  <% end %>
+                   <div class="col-xs-12 col-sm-4 emphasis">
+                     <h2>
+                     <strong><%= @user.followed_users.count %></strong>
+                     </h2>
+                     <p><small>Following</small></p>
+                     <%= link_to "View", following_user_path(@user), class: "btn btn-default btn-block" %>
+                  </div>
+
+                  <div class="col-xs-12 col-sm-4 emphasis">
+                    <h2><strong><%= @user.followers.count %></strong></h2>
+                    <p><small>Followers</small></p>
+                     <% if user_signed_in? %>
+                       <%= render 'follow_form' %>
+                     <% end %>
+                     <% if current_user?(@user) %>
+                       <%= link_to "Followers", followers_user_path(@user), class: "btn btn-default btn-block" %>
+                     <% end %>
+                  </div>
+                  </div>
+                    <div class="panel panel-info">
+                      <div class="panel panel-heading">
+                        <div class="panel-title text-left">
+                         .
+                        </div>
+                      </div>
+                   <% if  @user.microposts.any? %>
                       <ol class="microposts" %>
-                        <%= render @microposts %>
+                        <p class="lead"><%= render @microposts %></p>
                       </ol>
                     <% else %>
-                      <h3><span>Nothing Status</span></h3>
+                      <h3><span> Nothing Status</span></h3>
                     <% end %>
 
                   </div>
 		</div>
+                </div>
+                </div>
 	</div>
 </div>
-<li><%= session.inspect %></li>

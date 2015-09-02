@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get "search" => "user#search"
   patch "/users/:id", :to => 'users#add_room'
   resources :classrooms
   root to: 'static_pages#home'
@@ -32,10 +33,11 @@ Rails.application.routes.draw do
            resources :collection_assigments
          end
          resources :units
+         get "/evaluation/:id/result/", :to => 'evaluations#result', as: :evaluation_result
          resources :evaluations do
            resources :quizzes
           collection do
-	   get "/:id/evaluations/quizzes", :to => 'quizzes#index', as: :quizzes
+	   get "/:id/quizzes/index", :to => 'quizzes#index', as: :index_quizzes
            post "/quizzes/start", :to => 'quizzes#start'
            get "/:id/quizzez/question", :to => 'quizzes#question', as: :question_quizzes
  	   post "/:id/quizzes/question", :to => 'quizzes#question'

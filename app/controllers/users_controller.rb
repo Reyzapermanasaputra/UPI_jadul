@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @users = User.all
+    @users = User.order("identity").page(params[:page]).per(5)
   end
 
   def add_room
@@ -115,7 +116,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, :role_id, :photo)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :role_id, :photo, :identity, :phone, :address)
     end
   protected
     def needs_password?(user, params)

@@ -15,7 +15,7 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require bootstrap
+//= require foxycomplete
 //= require ckeditor/init
 //= require bootstrap-datepicker
-//= require locales/bootstrap-datetimepicker.<locale>
 //= require_tree .

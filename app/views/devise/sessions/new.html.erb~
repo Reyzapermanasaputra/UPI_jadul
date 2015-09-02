@@ -1,14 +1,27 @@
-<h2>Log in</h2>
+<br />
+<br />
+<div class="mainbox col-md-5 col-md-offset-3 col-sm-5 col-sm-offset-3">
+  <div class="iconupi">
+    <%= image_tag('logo-upi.png', alt: 'University Education Indonesia') %>
+  </div>
+  <br />
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-<div class="field">
-    <%= f.label :email %>
-    <%= f.email_field :email, autofocus: true, placeholder:  "Email", :style => "height: 30px;"%>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="panel-title text-center">Login</div>
   </div>
 
-  <div class="field">
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+<div class="panel-body">
+  <div class="form-group input-group-lg">
+    <%= f.label :identity %>
+    <%= f.text_field :identity, autofocus: true, placeholder:  "Identity", class: "form-control", required: true%>
+  </div>
+
+  <div class="form-group input-group-lg">
     <%= f.label :password %>
-    <%= f.password_field :password, autocomplete: "off", placeholde: "Password", :style => "height: 30px;" %>
+    <%= f.password_field :password, autocomplete: "off", placeholder: "Password", class: "form-control", required: true %>
   </div>
 
   <% if devise_mapping.rememberable? -%>
@@ -19,8 +32,10 @@
   <% end -%>
 
   <div class="actions">
-    <%= f.submit "Log in" %>
+    <p class="text-right"><%= f.submit "Log in", class: "btn btn-default btn-sm" %>
   </div>
 <% end %>
-
-<%= render "devise/shared/links" %>
+</div>
+</div>
+</div>
+</div>

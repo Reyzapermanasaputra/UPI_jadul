@@ -8,6 +8,11 @@ class EvaluationsController < ApplicationController
     @evaluations = @topic.evaluations.order('id ASC')
   end
 
+  def result
+    @topic = Topic.find(params[:topi_id])
+    @evaluation = @topic.evaluations.find(params[:id])
+  end
+
   # GET /evaluations/1
   # GET /evaluations/1.json
   def show
@@ -39,7 +44,7 @@ class EvaluationsController < ApplicationController
 
     respond_to do |format|
       if @evaluation.save
-        format.html { redirect_to dsd[@evaluation.topic, @evaluation], notice: 'Evaluation was successfully created.' }
+        format.html { redirect_to [@evaluation.topic, @evaluation], notice: 'Evaluation was successfully created.' }
       else
         format.html { render :new }
       end

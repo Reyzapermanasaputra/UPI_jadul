@@ -3,6 +3,9 @@ http_basic_authenticate_with name: "rey", password: "test", only: :start
 
 
   def index
+    @topic = Topic.find(params[:topic_id])
+    @evaluation = @topic.evaluations.find(params[:evaluation_id])
+    @quiz = @evaluation.quizzes.all.order('id DESC')
   end
 
   def start
@@ -61,6 +64,10 @@ http_basic_authenticate_with name: "rey", password: "test", only: :start
 	#	@correct = false
 	# end
        #  redirect_to action: "end"
+
+  end
+
+  def show
 
   end
 

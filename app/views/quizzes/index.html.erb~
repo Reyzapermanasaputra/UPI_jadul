@@ -1,25 +1,25 @@
-<br />
-<br />
-<div class="text-center">
-<div class="row">
-  <div class="spacer"></div>
-  <div class="col-xs-4">
-  <div class="spacer"></div>
-</div>
-<div class="col-xs-4">
-  <div class="panel panel-default">
-    <div class="panel-body">
-<h3>Let's pray before play</h3>
+<p id="notice"><%= notice %></p>
 
-  <%= form_tag({:controller => "quiz", :action => "start"}) do %>
+<h1>Listing Evaluations</h1>
 
-
-    <div class="center">
-      <%= submit_tag "Start", :class => "btn btn-default" %>
-    </div>
-  <% end %>
-    </div>
-  </div>
-</div>
-</div>
-</div>
+<table class="table table-stripped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Class</th>
+      <th>Action</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @quiz.each do |quiz| %>
+      <tr>
+        <td><%= quiz.user.name %></td>
+        <td><%= quiz.user.classrooms.collect { |a| a.name }.join(" ") %></td>
+        <td><%# link_to 'Show', [evaluation.topic, evaluation] %></td>
+        <td><%# link_to 'Edit', edit_topic_evaluation_path(evaluation.topic, evaluation) %></td>
+        <td><%# link_to 'Destroy', [evaluation.topic, evaluation], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

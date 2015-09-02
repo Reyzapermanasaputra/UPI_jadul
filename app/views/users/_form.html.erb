@@ -10,27 +10,44 @@
       </ul>
     </div>
   <% end %>
+
+   <div class="input-group input-group-lg">
+    <%= f.label :id %>
+    <%= f.text_field :identity, placeholder: "Id", class: "form-control"%>
+  </div>
+
+  <div class="input-group input-group-lg">
+    <%= f.label :name %>
+    <%= f.text_field :name, placeholder: "Name", class: "form-control" %>
+  </div>
+
   <div class="field">
     <%= f.label :photo %>
     <%= f.file_field :photo %>
   </div>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name, placeholder: "Name", :style => "height: 30px;" %>
+
+  <div class="input-group input-group-lg">
+    <%= f.label :email %>
+    <%= f.email_field :email, placeholder: "Email", class: "form-control"%>
   </div>
 
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.email_field :email, placeholder: "Email", :style => "height: 30px;"%>
+  <div class="input-group input-group-lg">
+    <%= f.label :phone %>
+    <%= f.text_field :phone, placeholder: "Phone",  class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= f.label :password %><br>
-    <%= f.password_field :password, placeholder: "Can't be blank", :style => "height: 30px;"  %>
+ <div class="input-group input-group-lg">
+    <%= f.label :address %>
+    <%= f.text_field :address, placeholder: "Address", class: "form-control" %>
   </div>
 
-  <div class="field">
+   <div class="input-group input-group-lg">
+    <%= f.label :password %>
+    <%= f.password_field :password, placeholder: "Can't be blank",class: "form-control"  %>
+  </div>
+
+  <div class="field"><br />
     <%= collection_select(:user, :role_id, Role.all, :id, :name, {prompt: true }) %>
   </div>
   <div class="actions">

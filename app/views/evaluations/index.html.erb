@@ -19,6 +19,7 @@
         <td><%= link_to 'Show', [evaluation.topic, evaluation] %></td>
         <td><%= link_to 'Edit', edit_topic_evaluation_path(evaluation.topic, evaluation) %></td>
         <td><%= link_to 'Destroy', [evaluation.topic, evaluation], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><span class="label label-info"><%= evaluation.quizzes.size %> student completed</span><%= link_to 'see', topic_evaluation_result_path(evaluation.topic, evaluation) %></td>
       </tr>
     <% end %>
   </tbody>

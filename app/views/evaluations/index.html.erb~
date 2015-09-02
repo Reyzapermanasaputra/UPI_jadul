@@ -16,17 +16,11 @@
       <tr>
         <td><%= evaluation.name %></td>
         <td><%= evaluation.password %></td>
-        <% if current_student? %>
-        <%= form_tag({controller: "quiz", action: "start"}) do %>
-
-       <td><%= submit_tag "start", class: "btn btn-default" %></td>
-       <% end %>
-       <% else %>
         <td><%= link_to 'Show', [evaluation.topic, evaluation] %></td>
         <td><%= link_to 'Edit', edit_topic_evaluation_path(evaluation.topic, evaluation) %></td>
         <td><%= link_to 'Destroy', [evaluation.topic, evaluation], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><span class="label label-info"><%= evaluation.quizzes.size %> student completed</span><%= link_to 'see', topic_evaluation_result_path(evaluation.topic, evaluation) %></td>
       </tr>
-    <% end %>
     <% end %>
   </tbody>
 </table>

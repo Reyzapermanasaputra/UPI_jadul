@@ -8,6 +8,11 @@ class EvaluationsController < ApplicationController
     @evaluations = @topic.evaluations.order('id ASC')
   end
 
+  def result
+    @topic = Topic.find(params[:topic_id])
+    @evaluation = @topic.evaluations.find(params[:id])
+  end
+
   # GET /evaluations/1
   # GET /evaluations/1.json
   def show
