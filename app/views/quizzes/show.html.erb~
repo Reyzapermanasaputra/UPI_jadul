@@ -1,0 +1,46 @@
+<br />
+<br />
+<div class="row">
+  <div class="spacer"></div>
+  <div class="col-md-12">
+  <div class="spacer"></div>
+</div>
+<h5>Quiz id : <%= @quiz.id %> </h5>
+<div class="col-md-8">
+  <div class="panel panel-default">
+    <div class="panel-body">
+<ol><% a = 1 %>
+<% for question in @evaluation.questions %>
+  <li><h4><%= h question.text %></h4></li>
+  <ul><% a = a + 1 %>
+   <h3><%= @quiz_all.all.map {|x| x.answer}[a-2] %></h3><br/><br/>
+  <% for choice in question.choices %>
+    <p class="choice">
+     <li><%= h choice.text %><% if choice.correct %>
+ (Correct)<% end %></li>
+    </p>
+  <% end %>
+  </ul>
+  <% end %>
+</ol>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-4">
+  <div class="panel panel-default">
+    <div class="panel-body">
+       <p id="question">
+         <%= link_to (image_tag @quiz.user.photo.url,:width =>             100, :height => 120, :crop => :fill, :class => "avatar img-circle img-thumbnail", :alt => "", :class => "img-responsive")%>
+         Id              : <%= @quiz.user.identity %><br />
+         Name            : <%= @quiz.user.name %><br />
+         Classroom	 : <%= @quiz.user.classrooms.collect {|a| a.name }.join(" ") %><br />
+         Date 		 : <%= Date.today %>
+
+       </p>
+
+    </div>
+  </div>
+</div>
+
+</div>

@@ -12,7 +12,7 @@
 <%= form_for [@quiz.evaluation, @quiz], url: answer_quizzes_topic_evaluations_path , multiple: true do |f| %>
 <ol>
 <% for question in @evaluation.questions %>
-  <li><h2><%= h question.text %></h2></li>
+  <li><h4><%= h question.text %></h4></li>
   <%= f.fields_for :tasks do |task_form| %>
   <% for choice in question.choices %>
     <p class="choice">
@@ -40,7 +40,15 @@
 <div class="col-md-4">
   <div class="panel panel-default">
     <div class="panel-body">
-      <h2><p id="question"> Total Questions <%= @evaluation.questions.size %></p></h2>
+       <p id="question">
+         Total Questions : <%= @evaluation.questions.size %><br />
+         Id              : <%= current_user.identity %><br />
+         Name            : <%= current_user.name %><br />
+         Classroom	 : <%= current_user.classrooms.collect {|a| a.name }.join(" ") %><br />
+         Date 		 : <%= Date.today %>
+
+       </p>
+
     </div>
   </div>
 </div>

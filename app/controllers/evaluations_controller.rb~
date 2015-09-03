@@ -1,5 +1,5 @@
 class EvaluationsController < ApplicationController
-  before_action :set_evaluation, only: [:show, :edit, :update, :destroy]
+  before_action :set_evaluation, only: [:show_result, :show, :edit, :update, :destroy]
 
   # GET /evaluations
   # GET /evaluations.json
@@ -9,7 +9,12 @@ class EvaluationsController < ApplicationController
   end
 
   def result
-    @topic = Topic.find(params[:topi_id])
+    @topic = Topic.find(params[:topic_id])
+    @evaluation = @topic.evaluations.find(params[:id])
+  end
+
+  def show_result
+    @topic = Topic.find(params[:topic_id])
     @evaluation = @topic.evaluations.find(params[:id])
   end
 

@@ -1,16 +1,11 @@
 class EvaluationsController < ApplicationController
-  before_action :set_evaluation, only: [:show, :edit, :update, :destroy]
+  before_action :set_evaluation, only: [:show_result, :show, :edit, :update, :destroy]
 
   # GET /evaluations
   # GET /evaluations.json
   def index
     @topic = Topic.find(params[:topic_id])
     @evaluations = @topic.evaluations.order('id ASC')
-  end
-
-  def result
-    @topic = Topic.find(params[:topic_id])
-    @evaluation = @topic.evaluations.find(params[:id])
   end
 
   # GET /evaluations/1

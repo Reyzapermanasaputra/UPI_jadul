@@ -1,14 +1,23 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Evaluations</h1>
+<h1>Quiz Result</h1>
 
+<p>
+  <strong>Name:</strong>
+  <%= @evaluation.name %>
+</p>
+
+<p>
+  <strong>Password:</strong>
+  <%= @evaluation.password %>
+</p>
 <table class="table table-stripped">
   <thead>
     <tr>
       <th>Name</th>
       <th>Class</th>
-      <th>Action</th>
-      <th colspan="3"></th>
+      <th>Date</th>
+      <th colspan="3">Action</th>
     </tr>
   </thead>
   <tbody>
@@ -16,7 +25,8 @@
       <tr>
         <td><%= quiz.user.name %></td>
         <td><%= quiz.user.classrooms.collect { |a| a.name }.join(" ") %></td>
-        <td><%# link_to 'Show', [evaluation.topic, evaluation] %></td>
+        <td><%= quiz.created_at.to_formatted_s(:long) %></td>
+        <td><%= link_to 'Show', [quiz.evaluation.topic, quiz.evaluation,quiz] %></td>
         <td><%# link_to 'Edit', edit_topic_evaluation_path(evaluation.topic, evaluation) %></td>
         <td><%# link_to 'Destroy', [evaluation.topic, evaluation], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
