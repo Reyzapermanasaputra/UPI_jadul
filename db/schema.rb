@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150902023231) do
+ActiveRecord::Schema.define(version: 20150905031640) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -244,6 +244,15 @@ ActiveRecord::Schema.define(version: 20150902023231) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "scores", force: :cascade do |t|
+    t.string   "value"
+    t.integer  "quiz_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "scores", ["quiz_id"], name: "index_scores_on_quiz_id", using: :btree
+
   create_table "tasks", force: :cascade do |t|
     t.integer  "question_id"
     t.string   "answer"
@@ -318,6 +327,7 @@ ActiveRecord::Schema.define(version: 20150902023231) do
   add_foreign_key "quizzes", "evaluations"
   add_foreign_key "quizzes", "questions"
   add_foreign_key "quizzes", "users"
+  add_foreign_key "scores", "quizzes"
   add_foreign_key "tasks", "questions"
   add_foreign_key "tasks", "quizzes"
   add_foreign_key "users", "roles"

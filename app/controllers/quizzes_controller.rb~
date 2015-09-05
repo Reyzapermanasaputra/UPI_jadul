@@ -73,7 +73,14 @@ before_filter :authenticate_user!
     @evaluation = @topic.evaluations.find(params[:evaluation_id])
     @quiz = @evaluation.quizzes.find(params[:id])
     @quiz_all = @quiz.tasks.order('id ASC')
-    @quiz_one = @quiz.tasks.all.map {|x| x.answer}[0]
+
+    @topic = Topic.find(params[:topic_id])
+    @evaluation = @topic.evaluations.find(params[:evaluation_id])
+    @quiz = @evaluation.quizzes.find(params[:id])
+    @kennel = []
+      5.times do
+        @kennel << Score.new
+      end
   end
 
   def end

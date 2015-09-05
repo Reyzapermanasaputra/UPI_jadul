@@ -24,16 +24,15 @@
 
   <% unless question.choices.any? %>
      <div class="form-group">
-        <%= task_form.text_area :answer, placeholder: "Your Answer", class: "form-control" %>
+        <p class= "choice"><%= task_form.text_area :answer, placeholder: "Your Answer", class: "form-control" %></p><br />
      </div>
   <% end %>
-
   <% end %>
 <% end %>
 </ol>
     </div>
   </div>
-    <%= submit_tag "Finish" %>
+    <p class="text-right"><%= submit_tag "Finish", class: "btn btn-lg btn-default" %></p>
 <% end %>
 </div>
 

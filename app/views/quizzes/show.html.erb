@@ -2,31 +2,62 @@
 <br />
 <div class="row">
   <div class="spacer"></div>
-  <div class="col-md-12">
-  <div class="spacer"></div>
+    <div class="col-md-12">
+      <div class="spacer"></div>
 </div>
-<h5>Quiz id : <%= @quiz.id %> </h5>
+<h5>Quiz id : <%= @quiz.id %></h5>
+
 <div class="col-md-8">
   <div class="panel panel-default">
     <div class="panel-body">
+
 <ol><% a = 1 %>
-<% for question in @evaluation.questions %>
-  <li><h4><%= h question.text %></h4></li>
+<% @kennel = [] %>
+   <% @evaluation.questions.count.times do %>
+   <% @kennel << Score.new %>
+   <% end %>
+  <%= form_tag topic_evaluation_quiz_scores_path(@topic, @evaluation, @quiz) do %>
+   <% @kennel.each do |puppy| %>
+    <%= fields_for 'scores[]', puppy do |p| %>
+         <%= p.check_box(:value) %>
+    <% end %>
+    <% end %>
+    <%= submit_tag "Finish" %>
+  <% end %>
+  <% for question in @evaluation.questions %>
+  <li><h4>
+  <div class="well">
+    <%= h question.text %>
+  </div>
+  </h4></li>
+
   <ul><% a = a + 1 %>
-   <h3><%= @quiz_all.all.map {|x| x.answer}[a-2] %></h3><br/><br/>
-  <% for choice in question.choices %>
+    <h3>
+      <% answer = @quiz_all.all.map {|x| x.answer}[a-2] %>
+    </h3>
+    <% for choice in question.choices %>
+      <% if answer.include?(choice.text.to_s) %>
+         <i class="fa fa-times"></i>
+      <% end %>
+      <% unless answer.include?(choice.text.to_s) %>
+        <i class="fa fa-circle-o-notch"></i>
+      <% end %>
+          <%= h choice.text %> <% if choice.correct %><i class="fa fa-check"></i><% end %>
+     </p>
+   <% end %>
+ </ul>
+   <% unless question.choices.any? %>
+        <ul>
+          <p class="lead"><i class="fa fa-quote-left"> <%= answer %></i></p>
+        </ul>
+  <% end %>
     <p class="choice">
-     <li><%= h choice.text %><% if choice.correct %>
- (Correct)<% end %></li>
-    </p>
-  <% end %>
-  </ul>
-  <% end %>
+<% end %>
 </ol>
+
+      </div>
     </div>
   </div>
-</div>
-
 <div class="col-md-4">
   <div class="panel panel-default">
     <div class="panel-body">
@@ -35,7 +66,7 @@
          Id              : <%= @quiz.user.identity %><br />
          Name            : <%= @quiz.user.name %><br />
          Classroom	 : <%= @quiz.user.classrooms.collect {|a| a.name }.join(" ") %><br />
-         Date 		 : <%= Date.today %>
+         Date 		 : <%= @quiz.created_at.to_formatted_s(:long) %>
 
        </p>
 

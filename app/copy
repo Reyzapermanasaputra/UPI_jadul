@@ -1,0 +1,8 @@
+<div class="feedback-choices">
+    <% for choice in question.choices %>
+      <% if answer.include?(choice.text.to_s) %>
+         <p class="incorrect feedback-choice">(Answer)
+      <% end %>
+        <%= h choice.text %>
+     </p>
+   <% end %>
