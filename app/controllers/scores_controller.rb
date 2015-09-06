@@ -6,10 +6,17 @@ class ScoresController < ApplicationController
     @evaluation = @topic.evaluations.find(params[:evaluation_id])
     @quiz = @evaluation.quizzes.find(params[:quiz_id])
     @count = @evaluation.questions.count
+    @quiz.scores.destroy_all
+    if params["scores"].nil?
+      redirect_to topic_evaluation_quizzes_path
+      flash[:success] = "Thanks a lot"
+    else
     params["scores"].each do |puppy|
       @quiz.scores.create(score_params(puppy))
     end
-    redirect_tso (:back)
+    redirect_to topic_evaluation_quizzes_path
+    flash[:success] = "Thanks a lot"
+    end
  end
 
  private

@@ -1,0 +1,4 @@
+class AddTotalToScores < ActiveRecord::Migration
+  def change
+  end
+end

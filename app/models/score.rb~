@@ -1,3 +1,9 @@
 class Score < ActiveRecord::Base
   belongs_to :quiz
+  before_create :count
+
+  def count
+    self.total = @quiz.scores.count * 100 / @evaluation.question.count
+  end
+
 end

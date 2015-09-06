@@ -16,6 +16,7 @@ class Ability
         can :manage, Assigment
         can :manage, CollectionAssigment
         can :manage, Evaluation
+        can :manage, Score
       else
         can :read, Topic
         can :read, Unit

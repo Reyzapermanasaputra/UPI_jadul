@@ -1,1 +1,1 @@
-<%= controller.redirect_to question_quiz_topic_evaluations_path %>
+<%= controller.redirect_to question_quizzes_topic_evaluations_path %>

@@ -34,6 +34,7 @@ Rails.application.routes.draw do
          resources :evaluations do
            resources :quizzes do
              resources :scores
+                    end
           collection do
            post "/:id", :to => 'scores#create', as: :create_scores
 	   get "/:id/quizzes/index", :to => 'quizzes#index', as: :index_quizzes
@@ -42,7 +43,6 @@ Rails.application.routes.draw do
  	   post "/:id/quizzes/question", :to => 'quizzes#question'
 	   post "/:id/quizzes/answer", :to => 'quizzes#answer', as: :answer_quizzes
 	   get "/:id/quizzes/end", :to => 'quizzes#end'
-         end
          end
          end
 end

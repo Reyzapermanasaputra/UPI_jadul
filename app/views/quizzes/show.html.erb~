@@ -13,17 +13,10 @@
 
 <ol><% a = 1 %>
 <% @kennel = [] %>
-   <% @evaluation.questions.count.times do %>
+   <% 1.times do %>
    <% @kennel << Score.new %>
    <% end %>
   <%= form_tag topic_evaluation_quiz_scores_path(@topic, @evaluation, @quiz) do %>
-   <% @kennel.each do |puppy| %>
-    <%= fields_for 'scores[]', puppy do |p| %>
-         <%= p.check_box :value, {multipart: true} 1, 0 %>
-    <% end %>
-    <% end %>
-    <%= submit_tag "Finish" %>
-  <% end %>
   <% for question in @evaluation.questions %>
   <li><h4>
   <div class="well">
@@ -52,11 +45,19 @@
         </ul>
   <% end %>
     <p class="choice">
+     <% @kennel.each do |puppy| %>
+       <%= fields_for 'scores[]', puppy do |p| %>
+         <p class="text-right"><%= p.check_box(:value, {}, "true", nil) %> True </p>
+       <% end %>
+    <% end %>
+    </p>
 <% end %>
 </ol>
 
       </div>
     </div>
+      <p class="text-right"><%= submit_tag "Finish", class: "btn btn-large" %></p>
+  <% end %>
   </div>
 <div class="col-md-4">
   <div class="panel panel-default">
@@ -66,7 +67,13 @@
          Id              : <%= @quiz.user.identity %><br />
          Name            : <%= @quiz.user.name %><br />
          Classroom	 : <%= @quiz.user.classrooms.collect {|a| a.name }.join(" ") %><br />
-         Date 		 : <%= @quiz.created_at.to_formatted_s(:long) %>
+         Date 		 : <%= @quiz.created_at.to_formatted_s(:long) %><br />
+         <% unless @quiz.scores.any? %>
+           the result have'nt checked
+         <% else %>
+           <strong>correct : <%= @quiz.scores.size %></strong><br />
+           <strong>Final Score : <%=  total = @quiz.scores.count * 100 / @evaluation.questions.count %></strong>
+         <% end %>
 
        </p>
 

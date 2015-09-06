@@ -45,7 +45,7 @@ before_filter :authenticate_user!
     @quiz.user_id = current_user.id
     if @quiz.save
       redirect_to (:back)
-      #sign_out @user
+      sign_out @user
     else
       flash[:danger] = "quiz failed"
       redirect_to (:back)
@@ -73,6 +73,7 @@ before_filter :authenticate_user!
     @evaluation = @topic.evaluations.find(params[:evaluation_id])
     @quiz = @evaluation.quizzes.find(params[:id])
     @quiz_all = @quiz.tasks.order('id ASC')
+
   end
 
   def end
