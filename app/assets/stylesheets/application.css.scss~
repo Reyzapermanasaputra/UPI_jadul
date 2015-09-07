@@ -347,7 +347,7 @@ aside {
 }
 }
 /* question (/quiz/question) page */
-.choice {font-size: 2em; margin: 0; border-radius: 4px;}
+.choice {font-size: 16px; margin: 0; }
 .choice:hover {background-color: #ffdb73;}
 .choice label {width: 400px; display: inline-block; padding: 0px 0 0px 0; margin: 0;}
 

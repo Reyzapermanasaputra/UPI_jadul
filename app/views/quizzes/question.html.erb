@@ -2,17 +2,17 @@
 <br />
 <div class="row">
   <div class="spacer"></div>
-  <div class="col-xs-12">
+  <div class="col-md-12">
   <div class="spacer"></div>
 </div>
-<div class="col-xs-8">
+<div class="col-md-8">
   <div class="panel panel-default">
     <div class="panel-body">
 
 <%= form_for [@quiz.evaluation, @quiz], url: answer_quizzes_topic_evaluations_path , multiple: true do |f| %>
 <ol>
 <% for question in @evaluation.questions %>
-  <li><h4><%= h question.text %></h4></li>
+  <li><h4 class="lead"><%= h question.text %></h4></li><hr />
   <%= f.fields_for :tasks do |task_form| %>
   <% for choice in question.choices %>
     <p class="choice">
@@ -21,7 +21,7 @@
     <br />
     </p>
   <% end %>
-
+<hr />
   <% unless question.choices.any? %>
      <div class="form-group">
         <p class= "choice"><%= task_form.text_area :answer, placeholder: "Your Answer", class: "form-control" %></p><br />
@@ -39,7 +39,9 @@
 <div class="col-md-4">
   <div class="panel panel-default">
     <div class="panel-body">
-       <p id="question">
+
+       <p class="lead">
+         <%= image_tag current_user.photo.url, class:"text-center" %><br /><br />
          Total Questions : <%= @evaluation.questions.size %><br />
          Id              : <%= current_user.identity %><br />
          Name            : <%= current_user.name %><br />

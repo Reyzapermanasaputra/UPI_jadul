@@ -2,5 +2,5 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', topic_evaluation_path(@evaluation.topic, @evaluation) %> |
-<%= link_to 'Back', topic_evaluations_path %>
+<%= link_to 'Show', topic_evaluation_path(@evaluation.topic, @evaluation), class: "btn btn-info" %>
+<%= link_to 'Back', topic_evaluations_path, "btn btn-danger" %>

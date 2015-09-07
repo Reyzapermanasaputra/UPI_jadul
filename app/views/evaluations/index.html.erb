@@ -1,8 +1,19 @@
 <p id="notice"><%= notice %></p>
+<br/><br/><br/><div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title"><h2><%= @topic.level %> Evaluations </h4></h2>
+  </div>
+<%= tabs %>
+<br /><hr />
+  <div class="panel-body">
+      <p class="lead"><%= @topic.description %></p>
+    <% if can? :create, Evaluation %>
+      <%= link_to 'New Evaluation', new_topic_evaluation_path, class: "btn btn-default" %>
+    <% end %>
+   <%= link_to "Back", user_topics_path(@topic.user.id), class: "btn btn-danger" %>
+  </div>
 
-<h1>Listing Evaluations</h1>
-
-<table class="table table-stripped">
+<table class="table table-hover">
   <thead>
     <tr>
       <th>Name</th>
@@ -15,16 +26,28 @@
     <% @evaluations.each do |evaluation| %>
       <tr>
         <td><%= evaluation.name %></td>
-        <td><%= evaluation.password %></td>
-        <td><%= link_to 'Show', [evaluation.topic, evaluation] %></td>
-        <td><%= link_to 'Edit', edit_topic_evaluation_path(evaluation.topic, evaluation) %></td>
-        <td><%= link_to 'Destroy', [evaluation.topic, evaluation], method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td><span class="label label-info"><%= evaluation.quizzes.size %> student completed</span><%= link_to 'see', topic_evaluation_quizzes_path(evaluation.topic, evaluation, evaluation.quizzes) %></td>
+        <td class="text-password"><%= evaluation.password %></td>
+        <td><%= link_to 'Show', [evaluation.topic, evaluation], class: "btn btn-info" %></td>
+        <td>
+        <% if can? :update, Evaluation %>
+          <%= link_to 'Edit', edit_topic_evaluation_path(evaluation.topic, evaluation),  class: "btn btn-warning" %>
+        <% end %>
+        </td>
+        <td>
+        <% if can? :destroy, Unit %>
+          <%= link_to 'Destroy', [evaluation.topic, evaluation], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+        <% end %>
+       </td>
+       <td><span class="label label-info"><%= evaluation.quizzes.size %> completed</span></td>
+       <td>
+       <% if can? :read, Score %>
+       <i class="fa fa-search fa-2x">
+         <%= link_to ' check', topic_evaluation_quizzes_path(evaluation.topic, evaluation, evaluation.quizzes) , class: "text-primary"%>
+       <% end %>
+       </i>
+       </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Evaluation', new_topic_evaluation_path, class: "btn btn-default" %>
+</div>

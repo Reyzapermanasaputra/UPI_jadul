@@ -1,42 +1,60 @@
 <% if current_student? %>
   <% render template: "quizzes/start" %>
 <% else %>
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @evaluation.name %>
-</p>
-
-<p>
-  <strong>Password:</strong>
-  <%= @evaluation.password %>
-</p>
+<br />
+<div class="row">
+  <div class="spacer"></div>
+  <div class="col-xs-12">
+  <div class="spacer"></div>
+</div>
+<div class="col-xs-8">
+  <div class="panel panel-default">
+    <div class="panel-body">
 
 <ol>
 <% for question in @evaluation.questions %>
-  <li><%= h question.text %></li>
-  <ul>
+  <li class="lead"><%= h question.text %></li><hr/>
+  <ol type="a">
     <% unless question.choices.any? %>
-      <li>The answer is opinion</li>
+      <li class="lead">The answer is opinion</li><hr/>
     <% end %>
   <% for choice in question.choices %>
-      <li><%= h choice.text %><% if choice.correct %>
- (Correct)<% end %></li>
+      <li class="lead"><%= h choice.text %><% if choice.correct %>
+ <i class="fa fa-check fa-1x"></i><% end %></li><hr/>
     <% end %>
-  </ul>
+  </ol>
 <% end %>
 </ol>
-
-
-
-
-
+    </div>
+  </div>
+  <p class="text-right"><%= link_to 'Edit', edit_topic_evaluation_path(@evaluation.topic, @evaluation), class: "btn btn-warning" %>
+  <%= link_to 'Back', topic_evaluations_path, class: "btn btn-danger" %></p>
+  <% end %>
+</div>
 
 <%# render template: "questions/index" %>
-<br />
-<br />
-<%= link_to 'Edit', edit_topic_evaluation_path(@evaluation.topic, @evaluation) %> |
-<%= link_to 'Back', topic_evaluations_path %>
-<% end %>
 <%#link_to "Add Question", topic_evaluation_questions_path(@evaluation.topic,  @evaluation, @questions) if deep level resources %>
+
+
+<div class="col-md-4">
+  <div class="panel panel-default">
+    <div class="panel-body">
+
+       <dl class="dl-horizontal">
+  	 <dt>
+         <p class="lead">
+           <strong>Name:</strong><br />
+           <strong>Password:</strong>
+         </p>
+       </dt>
+
+      <dd><p class="lead">
+        <%= @evaluation.name %><br>
+         <%= @evaluation.password %>
+      </p></dd>
+      </dl>
+
+    </div>
+  </div>
+</div>
+</div>

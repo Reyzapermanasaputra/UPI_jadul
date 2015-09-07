@@ -6,7 +6,6 @@ class AssigmentsController < ApplicationController
   def index
     @topic = Topic.find(params[:topic_id])
     @assigments = @topic.assigments.order('id ASC')
-    @time = Today.now
   end
 
   # GET /assigments/1
@@ -33,6 +32,7 @@ class AssigmentsController < ApplicationController
   def create
     topic = Topic.find(params[:topic_id])
     @assigment = topic.assigments.new(assigment_params)
+    authorize! :create, @assigment
     respond_to do |format|
       if @assigment.save
         format.html { redirect_to ([@assigment.topic, @assigment]), notice: 'Assigment was successfully created.' }

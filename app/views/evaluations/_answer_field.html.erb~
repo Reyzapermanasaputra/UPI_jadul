@@ -1,6 +1,8 @@
 <div class="input-group input-group-lg">
-  <%= f.text_field :text, placeholder: "Choices", class: "form-control" %>
+   <strong><%= f.label "choice" %></strong>
+  <%= f.text_field :text, placeholder: "choice", class: "form-control" %><br/>
   <%= f.check_box :correct %>
   <%= f.label :correct, "correct" %>
-  <%= f.link_to_remove "Remove Answer" %>
+
+  <%= f.link_to_remove "Remove Answer",  class: "fa fa-minus text-primary" %>
 </div></br>

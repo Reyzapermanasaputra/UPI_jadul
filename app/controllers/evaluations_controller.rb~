@@ -1,21 +1,11 @@
 class EvaluationsController < ApplicationController
   before_action :set_evaluation, only: [:show_result, :show, :edit, :update, :destroy]
-
+  load_and_authorize_resource except: :create
   # GET /evaluations
   # GET /evaluations.json
   def index
     @topic = Topic.find(params[:topic_id])
     @evaluations = @topic.evaluations.order('id ASC')
-  end
-
-  def result
-    @topic = Topic.find(params[:topic_id])
-    @evaluation = @topic.evaluations.find(params[:id])
-  end
-
-  def show_result
-    @topic = Topic.find(params[:topic_id])
-    @evaluation = @topic.evaluations.find(params[:id])
   end
 
   # GET /evaluations/1
@@ -46,7 +36,7 @@ class EvaluationsController < ApplicationController
   def create
     @topic = Topic.find(params[:topic_id])
     @evaluation = @topic.evaluations.create(evaluation_params)
-
+    authorize! :create, @evaluation
     respond_to do |format|
       if @evaluation.save
         format.html { redirect_to [@evaluation.topic, @evaluation], notice: 'Evaluation was successfully created.' }

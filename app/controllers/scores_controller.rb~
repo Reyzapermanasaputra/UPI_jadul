@@ -19,6 +19,16 @@ class ScoresController < ApplicationController
     end
  end
 
+ def destroy
+   @topic = Topic.find(params[:topic_id])
+   @evaluation = @topic.evaluations.find(params[:evaluation_id])
+   @quiz = @evaluation.quizzes.find(params[:quiz_id])
+   @score = @quiz.scores
+   @scores.destroy
+   redirect_to (:back)
+   flash[:success] = "Destroyed"
+ end
+
  private
 
  def score_params(my_params)

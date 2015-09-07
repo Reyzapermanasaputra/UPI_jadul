@@ -76,11 +76,13 @@ before_filter :authenticate_user!
 
   end
 
-  def end
-	 @correct = session[:correct]
-	 @total   = session[:total]
-
-	 @score = @correct * 100 / @total
+  def destroy
+    @topic = Topic.find(params[:topic_id])
+    @evaluation = @topic.evaluations.find(params[:evaluation_id])
+    @quiz = @evaluation.quizzes.find(params[:quiz_id])
+    @quiz.destroy
+    redirect_to (:back)
+    flash[:success] = "Destroyed"
   end
   private
 

@@ -1,6 +1,6 @@
 class EvaluationsController < ApplicationController
   before_action :set_evaluation, only: [:show_result, :show, :edit, :update, :destroy]
-
+  load_and_authorize_resource except: :create
   # GET /evaluations
   # GET /evaluations.json
   def index
@@ -36,7 +36,7 @@ class EvaluationsController < ApplicationController
   def create
     @topic = Topic.find(params[:topic_id])
     @evaluation = @topic.evaluations.create(evaluation_params)
-
+    authorize! :create, @evaluation
     respond_to do |format|
       if @evaluation.save
         format.html { redirect_to [@evaluation.topic, @evaluation], notice: 'Evaluation was successfully created.' }

@@ -2,7 +2,7 @@
 <% @contents.each do |content| %>
 <div class="panel">
   <div class="panel-body">
-    <h3><strong><%= content.title %></strong></h3><br /></h3>
+    <h3><strong><%= content.title %><hr /></strong></h3><br /></h3>
      <%= raw(content.body) %>
   </div>
 </div>

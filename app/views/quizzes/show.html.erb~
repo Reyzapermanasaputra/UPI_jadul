@@ -1,3 +1,6 @@
+<% if current_student? %>
+  <% controller.redirect_to root_url %>
+<% end %>
 <br />
 <br />
 <div class="row">
@@ -56,14 +59,17 @@
 
       </div>
     </div>
-      <p class="text-right"><%= submit_tag "Finish", class: "btn btn-large" %></p>
+      <p class="text-right">
+        <%= link_to "back", topic_evaluation_quizzes_path(@topic, @evaluation), class: "btn btn-danger" %> <%= submit_tag "Finish", class: "btn btn-primary" %>
+      </p>
   <% end %>
+
   </div>
 <div class="col-md-4">
   <div class="panel panel-default">
     <div class="panel-body">
-       <p id="question">
-         <%= link_to (image_tag @quiz.user.photo.url,:width =>             100, :height => 120, :crop => :fill, :class => "avatar img-circle img-thumbnail", :alt => "", :class => "img-responsive")%>
+       <p class="text-center">
+         <%= link_to (image_tag @quiz.user.photo.url,:width =>             100, :height => 120, :crop => :fill, :class => "avatar img-circle img-thumbnail", :alt => "", :class => "img-responsive")%><br /><br />
          Id              : <%= @quiz.user.identity %><br />
          Name            : <%= @quiz.user.name %><br />
          Classroom	 : <%= @quiz.user.classrooms.collect {|a| a.name }.join(" ") %><br />

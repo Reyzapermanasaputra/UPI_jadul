@@ -1,16 +1,25 @@
 <p id="notice"><%= notice %></p>
-
-<h1>Quiz Result</h1>
-
-<p>
-  <strong>Name:</strong>
-  <%= @evaluation.name %>
-</p>
-
-<p>
-  <strong>Password:</strong>
-  <%= @evaluation.password %>
-</p>
+<% if current_student? %>
+  <% controller.redirect_to root_url %>
+<% end %>
+<h1>Quiz Result <%= @topic.level %></h1>
+<br>
+<div class="col-md-8">
+  <p class="lead">
+    <strong>name evaluation : </strong>
+    <%= @evaluation.name %>
+  </p>
+</div>
+<div class="col-md-4">
+            <div class="input-group input-group-lg custom-search-form">
+              <input type="text" class="form-control" placeholder="Search">
+              <span class="input-group-btn">
+              <i class="fa fa-search"><button class="btn btn-default" type="button"></i>
+             </button>
+             </span>
+             </div><!-- /input-group -->
+        </div>
+<br>
 <table class="table table-stripped">
   <thead>
     <tr>
@@ -20,6 +29,7 @@
       <th>Action</th>
       <th>Score</th>
       <th>Checked</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -28,7 +38,7 @@
         <td><%= quiz.user.name %></td>
         <td><%= quiz.user.classrooms.collect { |a| a.name }.join(" ") %></td>
         <td><%= quiz.created_at.to_formatted_s(:long) %></td>
-        <td><%= link_to 'check', [quiz.evaluation.topic, quiz.evaluation,quiz] %></td>
+        <td><%= link_to 'check', [quiz.evaluation.topic, quiz.evaluation,quiz], class: "btn btn-primary" %></td>
         <td><strong><%= total = quiz.scores.count * 100 / @evaluation.questions.count %></strong</td>
         <td><% if quiz.scores.any? %>
             <i class="fa fa-check"></i>
@@ -37,9 +47,9 @@
            <% end %>
         </td>
         <td><%# link_to 'Edit', edit_topic_evaluation_path(evaluation.topic, evaluation) %></td>
-        <td><%# link_to 'Destroy', [evaluation.topic, evaluation], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', [quiz.evaluation.topic, quiz.evaluation, quiz], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-<%= link_to 'Back', topic_evaluations_path(@topic), class: "btn btn-primary"%>
+<%= link_to 'Back', topic_evaluations_path(@topic), class: "btn btn-danger"%>
