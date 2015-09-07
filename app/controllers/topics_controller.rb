@@ -48,10 +48,9 @@ class TopicsController < ApplicationController
   # PATCH/PUT /topics/1.json
   def update
     @user = User.find(params[:user_id])
-    @topic = @user.topics.find(topic_params)
+    @topic = @user.topics.find(params[:id])
     if @topic.update(topic_params)
-      flash[:notice] = 'Upload was successfully updated'
-      redirect_to topics_url
+      redirect_to user_topics_url, notice: 'Topic was successfully updated.'
     else
       render 'edit'
     end

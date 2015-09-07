@@ -14,7 +14,7 @@
   <div class="input-group input-group-lg">
     <%= f.label :name %><br>
     <%= f.text_field :name, class: "form-control" %>
-  </div><br>
+  </div>
   <div class="actions">
     <%= f.submit "Create", class: "btn btn-primary" %>
   </div>

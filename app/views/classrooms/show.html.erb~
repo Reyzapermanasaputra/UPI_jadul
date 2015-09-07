@@ -1,10 +1,4 @@
 <br>
-
-<p class="lead">
-  <strong>Id:</strong>
-  <%= @classroom.id %>
-</p>
-
 <p class="lead">
   <strong>Name:</strong>
   <%= @classroom.name %>

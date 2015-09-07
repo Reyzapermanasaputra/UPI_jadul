@@ -1,12 +1,8 @@
 <br />
 <br />
 
-<span class="text-info"><h2>Management Content</h2></span>
+<span class="text-info"><h2>New Unit</h2></span>
 
  <%= render 'form' %>
-<nav>
-  <ul class="pager">
-    <li class="previous"><%= link_to 'Back', topic_units_path(@unit.topic) %>
-     </li>
-  </ul>
-</nav>
+
+  <%= link_to 'Back', topic_units_path(@unit.topic), class: "btn btn-info" %>

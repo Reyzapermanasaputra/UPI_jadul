@@ -11,19 +11,23 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="input-group input-group-lg">
     <%= f.label :content, "Unit" %>
-    <%= f.text_area :content, :rows => 1 %>
-  </div>
+    <%= f.text_field :content, class: "form-control"  %>
+  </div><br />
 
   <%= f.fields_for :contents do |builder| %>
+   <div class="input-group input-group-lg">
     <%= builder.label :title %>
-    <%= builder.text_area :title, :rows => 1 %>
+    <%= builder.text_area :title, class: "form-control" %>
+  </div><br />
+
     <%= builder.label :body %>
     <%= builder.cktext_area :body %>
-    <%= builder.link_to_remove "Remove" %>
+    <%= builder.link_to_remove "Remove", class: "btn btn-danger" %><br />
     <% end %>
-    <%= f.link_to_add "Add Content", :contents %>
+
+    <%= f.link_to_add "Add Content", :contents, class: "btn btn-info" %><br />
   <div class="field">
     <%= f.submit "Create Unit", class: 'btn btn-warning' %>
   </div>

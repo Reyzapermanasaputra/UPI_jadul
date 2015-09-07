@@ -1,10 +1,8 @@
 <h2><%= @unit.content %></h2>
 <% @contents.each do |content| %>
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title"><h3><%= content.title %></h3><br /></h3>
-  </div>
+<div class="panel">
   <div class="panel-body">
+    <h3><strong><%= content.title %></strong></h3><br /></h3>
      <%= raw(content.body) %>
   </div>
 </div>
@@ -12,19 +10,13 @@
 <%= page_entries_info @contents %>
 <nav>
   <ul class="pager">
-    <li class="previous"><%= link_to_previous_page @contents, "Previous"%></li>
-    <li class="next"><%=link_to_next_page @contents, "Next" %></li>
+    <li class="previous"><%= link_to_previous_page @contents, "Previous", class: "text-primary"%></li>
+    <li class="next"><%=link_to_next_page @contents, "Next", class: "text-primary" %></li>
   </ul>
 </nav>
 <br />
 <% if can? :update, Unit %>
-<nav>
-  <ul class="pager">
-    <li class="previous"> <%= link_to 'Edit', edit_topic_unit_path(@unit.topic, @unit)%>
-     </li>
+<%= link_to 'Edit', edit_topic_unit_path(@unit.topic, @unit), class: "btn btn-warning"%>
 <% end %>
-<nav>
-  <ul class="pager">
-<li class="previous"><%= link_to 'Back', topic_units_path(@unit.topic)%></li>
-  </ul>
-</nav>
+
+<%= link_to 'Back', topic_units_path(@unit.topic), class: "btn btn-danger"%>

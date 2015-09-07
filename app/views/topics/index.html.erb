@@ -1,43 +1,46 @@
-<span class="text-default"><h3>My Courses</h3></span>
-
-<span class="text-default">Management course for your teach</span>
-
+<div class="row">
+<h1>Listing Courses </h1>
+  <div class="col-md-8"><br><br>
+    <% if can? :create, Topic %>
+      <%= link_to 'New Topic', new_user_topic_path, class: "btn btn-primary"%>
+    <% end %>
 <br />
-<br />
+</div>
+  <div class="col-md-4">
+            <div class="input-group input-group-lg custom-search-form">
+              <input type="text" class="form-control" placeholder="Search">
+              <span class="input-group-btn">
+              <i class="fa fa-search"><button class="btn btn-default" type="button"></i>
+             </button>
+             </span>
+             </div><!-- /input-group -->
+        </div>
+</div><br />
 <ul class="nav">
     <% @topics.each do |topic| %>
     <div class="nav-collapse">
-    <div class="col-xs-3 col-md-3">
-    <a href="#" class="thumbnail">
-      <%= image_tag topic.avatar.url, :width => 100, :height => 120, :crop => :fill %>
-    </a>
+    <div class="col-md-3">
+      <%= link_to (image_tag topic.avatar.url, :width => 100, :height => 120, :crop => :fill), topic_units_path(topic.id), class: "thumbnail" %>
     </div>
-<h3><span class="text-default"><%= link_to topic.level, topic_units_path(topic.id), class: "newsomething" %>
+<h3><span class="text-default"><%= link_to topic.level, topic_units_path(topic.id), class: "text-primary" %>
 </span></h3>
-<span class="text-default"><%= topic.description %>
+<span class="lead"><%= topic.description %>
 </span>
 <nav>
   <ul class="pager">
-    <li class="next"><%= link_to "See Course", topic_units_path(topic.id) %>
+    <li class="next"><%= link_to "See Course", topic_units_path(topic.id), class: "text-primary" %>
      </li>
   </ul>
 </nav>
+<div class="col-md-3">
 <% if can? :edit, Topic %>
-  <%= link_to 'Edit', edit_user_topic_path(topic.user, topic) %>
+  <%= link_to 'Edit', edit_user_topic_path(topic.user, topic), class: "btn btn-warning" %>
 <% end %>
 <% if can? :destroy, Topic %>
-  <%= link_to 'Destroy', [topic.user, topic], method: :delete, data: { confirm: 'Are you sure?' } %>
+  <%= link_to 'Destroy', [topic.user, topic], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
    <% end %>
 </div>
+</div>
 </ul>
-<hr />
-    <% end %><br />
-<% if can? :create, Topic %>
-<nav>
-  <ul class="pager">
-    <li class="previous"><%= link_to 'New Topic', new_user_topic_path%>
-     </li>
-  </ul>
-</nav>
+<hr/><br>
 <% end %>
-<br />

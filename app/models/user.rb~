@@ -4,18 +4,12 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  #search
-   def self.search(query)
-    # where(:name, query) -> This would return an exact match of the query
-    where("name like ?", "%#{query}%")
-  end
-
   #Relationship
-  has_many :collection_assigments
+  has_many :collection_assigments, dependent: :destroy
   has_and_belongs_to_many :classrooms
   belongs_to :role
-  has_many :topics
-  has_many :units
+  has_many :topics, dependent: :destroy
+  has_many :units, dependent: :destroy
   has_many :microposts, dependent: :destroy
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
   has_many :followed_users, through: :relationships, source: :followed

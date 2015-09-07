@@ -9,7 +9,7 @@
           </div>
           <div class="panel-body">
 	  <!-- SIDEBAR USERPIC -->
-           <div class="profile-userpic1">
+           <div class="profile-userpic">
            <%= link_to (image_tag current_user.photo.url,:width =>             100, :height => 120, :crop => :fill, :class => "avatar img-
                circle img-thumbnail", :alt => "", :class => "img-responsive"),  current_user%>
            </div>
@@ -18,7 +18,7 @@
 		<!-- SIDEBAR USER TITLE -->
 		<div class="profile-usertitle">
 		  <p class="lead">
-		    <%= link_to current_user.name, current_user %>
+		    <%= current_user.name %>
 		  </p>
 		  <div class="profile-usertitle-job">
 

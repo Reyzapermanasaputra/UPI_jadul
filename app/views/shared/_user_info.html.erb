@@ -18,11 +18,8 @@
 		<!-- SIDEBAR USER TITLE -->
 		<div class="profile-usertitle">
 		  <p class="lead">
-		    <%= link_to current_user.name, current_user %>
+		    <%= current_user.name %>
 		  </p>
-		  <div class="profile-usertitle-job">
-
-		  </div>
                   <div class="profile-usertitle-job">
                     <%= pluralize(current_user.microposts.count, "Status") %>
 		  </div>

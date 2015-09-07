@@ -21,7 +21,7 @@
   </div>
   <div class="field">
     <%= f.label :avatar, "input avatar" %><br>
-    <%= f.file_field :avatar %>
+    <%= f.file_field :avatar, required: true %>
   </div>
     <%= f.submit "Create topic", class: "btn btn-info" %>
     <%= link_to 'Cancel', root_path, class: "btn btn-danger" %>

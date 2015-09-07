@@ -1,6 +1,6 @@
 <div class="panel panel-primary">
   <div class="panel-heading">
-    <h3 class="panel-title"><h3><%= @assigment.title %></h3><br /></h3>
+    <h3 class="panel-title"><h3 class="lead"><%= @assigment.title %></h3><br /></h3>
 
     <p class="text-right">
       <strong>Due time:</strong>
@@ -11,13 +11,13 @@
 <br />
 <div class="panel-body">
 <p>
-  <strong>Task Description:</strong>
-  <%= raw(@assigment.description) %>
+  <h1>Task Description:</h1>
+  <span class="lead"><%= raw(@assigment.description) %></span>
 </p>
 <% if lecturer? %>
-<%= link_to 'Edit', edit_topic_assigment_path(@assigment.topic, @assigment) %> |
-<%= link_to 'Back', topic_assigments_path(@assigment.topic) %>
+<%= link_to 'Edit', edit_topic_assigment_path(@assigment.topic, @assigment), class: "btn btn-warning" %>
 <% end %>
+<%= link_to 'Back', topic_assigments_path(@assigment.topic), class: "btn btn-danger" %>
 </div>
 
   <table class="table table-hover">
@@ -41,8 +41,8 @@
         <td><%= collection.user.classrooms.collect { |a| a.name }.join(" ") %></td>
         <td><%= collection.created_at.to_formatted_s(:long) %></td>
         <% if lecturer? %>
-        <td><%= link_to "Download Task", collection.attachment_url %></td>
-        <td><%= link_to "Delete", [collection.assigment, collection], method: :delete, class: "btn btn-danger", data: {confirm: "Are you sure delete assigment ?"} %><td>
+        <td class="lead"><%= link_to "Download Task", collection.attachment_url, class: "text-primary" %></td>
+        <td><%= link_to "Delete", [collection.assigment, collection], method: :delete, class: "btn btn-danger", data: {confirm: "Are you sure delete assigment ?"}, class: "btn btn-danger" %><td>
         <% else %>
         <td><%= collection.attachment %></td>
         <% end %>
@@ -50,11 +50,6 @@
     <% end %>
   </tbody>
 </table>
-
-
-
-
-
 
 <div class="panel-footer">
 <% if current_student? %>
@@ -65,7 +60,7 @@
 
   </p>
   <p>
-    <%= f.submit "Upload Assigment" %>
+    <%= f.submit "Upload Assigment", class: "btn btn-warning" %>
   </p>
 <% end %>
 <% end %>

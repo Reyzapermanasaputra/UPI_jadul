@@ -1,12 +1,20 @@
-<br />
-<%= link_to 'New User', new_user_path, class: "btn btn-lg" %> ||
-<%= paginate @users %>
-
-<div class="panel panel-info">
-  <div class="panel-heading">Users Management</div>
-    <div class="panel-body">
-<div class="table-responsive">
-<table class="table table-bordered">
+<div class="row">
+<h1>Listing User</h1>
+<br><div class="col-md-8">
+<%= link_to 'New User', new_user_path, class: "btn btn-primary" %>
+</div>
+<div class="col-md-4">
+            <div class="input-group input-group-lg custom-search-form">
+              <input type="text" class="form-control" placeholder="Search">
+              <span class="input-group-btn">
+              <i class="fa fa-search"><button class="btn btn-default" type="button"></i>
+             </button>
+             </span>
+             </div><!-- /input-group -->
+        </div>
+</div>
+<br>
+<table id="roles" class="table table-hover">
   <thead>
     <tr>
       <th class="info">Id</th>
@@ -28,14 +36,10 @@
         <td><%= user.email %></td>
         <td><%= user.phone %></td>
         <td><%= user.address %></td>
-        <td><%= link_to 'Show', user, class: "btn btn-mini" %></td>
-        <td><%= link_to 'Edit', edit_user_path(user), class: "btn btn-mini btn-primary" %></td>
+        <td><%= link_to 'Show', user, class: "btn btn-info" %></td>
+        <td><%= link_to 'Edit', edit_user_path(user), class: "btn btn-warning" %></td>
         <td><%= link_to 'Destroy', user,class: "btn btn-mini btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-</div>
-</div>

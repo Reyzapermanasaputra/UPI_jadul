@@ -2,5 +2,5 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @classroom, class: "btn btn-info" %> <i>  </i>
+<%= link_to 'Show', @classroom, class: "btn btn-info" %> <i class= "fa fa-minus fa-2x">  </i>
 <%= link_to 'Back', classrooms_path, class: "btn btn-danger" %>

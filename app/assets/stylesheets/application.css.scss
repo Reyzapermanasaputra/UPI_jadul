@@ -10,9 +10,10 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require_self
+ *= require dataTables/jquery.dataTables
  *= require bootstrap-datepicker
  *= require_tree .
- *= require_self
  */
 @import 'bootstrap';
 @import "bootstrap-responsive";
@@ -355,3 +356,7 @@ aside {
 .incorrect {background-color: #ff8373;}
 .feedback {font-weight: bold; font-size: 1.2em; }
 .feedback-choice {margin: 0 0 5px 0; font-size: 1.2em; padding: 10px 5px 10px 25px; border-radius: 4px;}
+
+.custom-search-form{
+    margin-top:5px;
+}

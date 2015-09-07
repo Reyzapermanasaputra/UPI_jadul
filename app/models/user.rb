@@ -5,11 +5,11 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   #Relationship
-  has_many :collection_assigments
+  has_many :collection_assigments, dependent: :destroy
   has_and_belongs_to_many :classrooms
   belongs_to :role
-  has_many :topics
-  has_many :units
+  has_many :topics, dependent: :destroy
+  has_many :units, dependent: :destroy
   has_many :microposts, dependent: :destroy
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
   has_many :followed_users, through: :relationships, source: :followed

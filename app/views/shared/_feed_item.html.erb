@@ -6,19 +6,17 @@
     </div>
 
    <div class="media-body">
-     <h4 class="media-heading"><p class="lead"><%= link_to feed_item.user.name, feed_item.user %></p></h4>
-
-  <span class="content"><p class="lead"><%= feed_item.content %></p></span>
-
-  <span class="timestamp">
-    <p class="text-right">
-    Posted <%= time_ago_in_words(feed_item.created_at) %> ago | <% if current_user?(feed_item.user) %>
-   <%= link_to "Destroy", feed_item, method: :delete, confirm: "Are you sure ?", title: feed_item.content, class: "btn btn-mini btn-danger" %>
-   <% end %>
-   </p>
-  </span>
-
+     <h4 class="media-heading"><p class="lead">
+     <%= link_to feed_item.user.name, feed_item.user, class: "text-primary" %></p></h4>
+     <span class="content"><p class="lead"><%= feed_item.content %></p></span>
+     <span class="timestamp">
+     <p class="text-right">
+     Posted <%= time_ago_in_words(feed_item.created_at) %> ago |
+     <% if current_user?(feed_item.user) %>
+       <%= link_to "Destroy", feed_item, method: :delete, confirm: "Are you sure ?", title: feed_item.content, class: "btn btn-danger btn-xs" %>
+     <% end %>
+     </p>
+     </span>
+  </div>
 </div>
-</div>
-
 <hr />

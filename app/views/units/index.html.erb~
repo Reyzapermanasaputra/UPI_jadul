@@ -1,46 +1,36 @@
-<br/><div class="panel panel-warning">
+<br/><br/><br/>
+<div class="panel panel-inf">
   <div class="panel-heading">
-<<<<<<< HEAD
     <h3 class="panel-title"><h2><%= @topic.level %></h4></h2><br />
-    <h5> total watched <%= @count %></h5>
-=======
-    <h4 class="panel-title"><h2><%= @topic.level %></h4></h2>
->>>>>>> 4447194c288ccee252a38839996f5c5c4c6c3fe3
   </div>
 <%= tabs %>
+<hr/>
+ <div class="panel-body">
+    <p class="lead"><%= @topic.description %></p>
+<% if can? :create, Unit %>
+  <%= link_to 'New Units', new_topic_unit_path, class: "btn btn-primary"%>
+<% end %>
+  <%= link_to "Back", user_topics_path(@topic.user.id), class: "btn btn-danger" %>
+ </div>
+  <table class="table table-hover">
+    <thead>
+    </thead>
  <% @units.each do |unit| %>
-  <div class="panel-body">
-<nav>
-  <ul class="pager">
-    <li class="previous"><%= link_to unit.content, [unit.topic, unit]%>
-     </li>
-  </ul>
-</nav>
-<br />
-      Author : <% if unit.user %> by <%= link_to unit.user.name, user_path(unit.user.id) %><% end %>
-<% if can? :update, Unit %>
- <%= link_to 'Edit Units', edit_topic_unit_path(unit.topic, unit) %>
+   <tbody>
+   <td class="lead"><%= link_to unit.content, [unit.topic, unit], class: "text-primary" %></td>
+   <td class="lead">Author : <% if unit.user %> by <%= link_to unit.user.name, user_path(unit.user.id), class: "text-primary" %><% end %></td>
+  <td>
+    <% if can? :update, Unit %>
+    <%= link_to 'Edit Units', edit_topic_unit_path(unit.topic, unit), class: "btn btn-warning" %>
+    <% end %>
+  </td>
+  <td>
+    <% if can? :destroy, Unit %>
+    <%= link_to 'Destroy', [unit.topic, unit], :confirm => 'Are you sure?', :method => :delete, class: "btn btn-danger" %>
+    <% end %>
+  </td>
 <% end %>
-<% if can? :destroy, Unit %>
- <%= link_to 'Destroy', [unit.topic, unit], :confirm => 'Are you sure?', :method => :delete %>
-<% end %><hr />
-  </div>
-<% end %>
+  </tbody>
+</table>
 
 </div>
-<% if can? :create, Unit %>
-<nav>
-  <ul class="pager">
-    <li class="previous"><%= link_to 'New Units', new_topic_unit_path%>
-     </li>
-  </ul>
-</nav>
-<% end %>
-<<<<<<< HEAD
-<nav>
-  <ul class="pager">
-  <li class="forward"><%= link_to 'Start Quiz', quiz_topics_path(@topic) %></li>
-  </ul>
-</nav>
-=======
->>>>>>> 4447194c288ccee252a38839996f5c5c4c6c3fe3

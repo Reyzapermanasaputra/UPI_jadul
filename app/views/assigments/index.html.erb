@@ -1,12 +1,19 @@
-<br/><div class="panel panel-warning">
+<br/><br/><br/><div class="panel panel-info">
   <div class="panel-heading">
-    <h3 class="panel-title"><h2><%= @topic.level %> Assigments </h4></h2>
+    <h3 class="panel-title"><h2><%= @topic.level %> Assignments </h4></h2>
   </div>
 <%= tabs %>
 <br /><hr />
+  <div class="panel-body">
+      <p class="lead"><%= @topic.description %></p>
+    <% if lecturer? %>
+      <%= link_to 'New Assignment', new_topic_assigment_path, :class => "btn btn-primary" %>
+    <% end %>
+   <%= link_to "Back", user_topics_path(@topic.user.id), class: "btn btn-danger" %>
+  </div>
 <table class="table table-hover">
   <thead>
-    <tr>
+    <tr class="lead">
       <th>Title</th>
       <th>Due time</th>
       <th>Total</td>
@@ -18,34 +25,30 @@
   <tbody>
     <% @assigments.each do |assigment| %>
       <tr>
-        <td><%= assigment.title %></td>
-        <td><%= assigment.due_time %></td>
-        <td><span class="label label-info"><%= assigment.collection_assigments.size %> student completed</span></td>
+        <td class="lead"><%= assigment.title %></td>
+        <td class="lead"><%= assigment.due_time %></td>
+        <td class="lead"><span class="label label-info"><%= assigment.collection_assigments.size %> completed</span></td>
 
       <% unless lecturer? and assigment.due_time <= Time.now.strftime('%m/%d/%Y') %>
-        <td><span class="label label-info">Available</span></td>
+        <td class="lead"><span class="label label-info">Available</span></td>
       <% else %>
-        <td><span class="label label-info">Expired</span></td>
+        <td class="lead"><span class="label label-danger">Expired</span></td>
       <% end %>
 
       <% unless current_student? and assigment.due_time <= Time.now.strftime('%m/%d/%Y') %>
-      <% if current_student? %><td><%= link_to 'upload your assigment', [assigment.topic, assigment], class: "btn btn-default" %></td><% end %>
+      <% if current_student? %>
+      <td class="lead"><%= link_to 'upload your assigment', [assigment.topic, assigment], class: "btn btn-default" %></td><% end %>
       <% else %>
-        <td><span class="label label-info">Expired</span></td>
+      <td class="lead"><span class="label label-danger">Expired</span></td>
       <% end %>
 
       <% if lecturer? %>
-        <td><%= link_to 'Show', [assigment.topic, assigment] %></td>
-        <td><%= link_to 'Edit', edit_topic_assigment_path(assigment.topic, assigment) %></td>
-        <td><%= link_to 'Destroy', [assigment.topic, assigment], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td class="lead"><%= link_to 'Check', [assigment.topic, assigment], class: "btn btn-info" %></td>
+        <td class="lead"><%= link_to 'Edit', edit_topic_assigment_path(assigment.topic, assigment), class: "btn btn-warning" %></td>
+        <td class="lead"><%= link_to 'Destroy', [assigment.topic, assigment], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
       <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
 </div>
-<% if lecturer? %>
-<%= link_to 'New Assigment', new_topic_assigment_path, :class => "btn btn-default" %>
-<% end %>
