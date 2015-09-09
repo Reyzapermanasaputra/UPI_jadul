@@ -13,22 +13,23 @@
 
   <div class="input-group input-group-lg">
     <strong><%= f.label :name %></strong>
-    <%= f.text_field :name, placeholder: "type evaluation", class: "form-control" %>
+    <%= f.text_field :name, placeholder: "type evaluation", class: "form-control", required: true %>
   </div>
 
   <div class="input-group input-group-lg">
     <br>
     <strong><%= f.label :name %></strong>
-    <%= f.text_field :password, placeholder: "password", class: "form-control" %>
+    <%= f.text_field :password, placeholder: "password", class: "form-control", required: true %>
   </div>
   <br />
 
   <%= f.fields_for :questions do |builder| %>
     <%= render 'questions_field', :f => builder %>
   <% end %>
-  <%= f.link_to_add "Add Question", :questions,  class: "fa fa-plus text-primary" %>
+  <%= f.link_to_add "Add Question", :questions,  class: "fa fa-plus btn btn-warning" %>
   <br />
   <div class="actions">
+    <br />
     <%= f.submit "create", class: "btn btn-primary" %>
   </div>
 <% end %>

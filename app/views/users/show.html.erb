@@ -26,11 +26,11 @@
                     </h2>
 
                    <div class="profile-usertitle-job">
-                 <% if student? and admin? %>
+                 <% if student? %>
                    <%= form_for @user, :url => {:action => "add_room"} do |f| %>
                   <%= select_tag "adding_class",
 	          options_from_collection_for_select(Classroom.all, 'id',
-                  'name', @user.classrooms.map{ |j| j.id })%>
+                  'name', @user.classrooms.map{ |j| j.id })%><br />
                   <%= f.submit "add classroom", :class => "btn-btn-default"%>
                 <% end %>
                 <% end %>
@@ -51,10 +51,8 @@
 		<!-- END SIDEBAR USER TITLE -->
 		<!-- SIDEBAR BUTTONS -->
 		<div class="profile-userbuttons">
-                <% if admin? %>
 		<%= link_to 'Edit', edit_user_path(@user), :class => "btn btn-default" %>
 		<%= link_to 'Back', users_path, :class => "btn btn-default"%>
-                <% end %>
 		</div>
 		<!-- END SIDEBAR BUTTONS -->
 		<!-- SIDEBAR MENU -->

@@ -44,8 +44,8 @@ before_filter :authenticate_user!
     @quiz = @evaluation.quizzes.new(quiz_params)
     @quiz.user_id = current_user.id
     if @quiz.save
-      redirect_to (:back)
-      sign_out @user
+      flash[:success] = "your data has been saving"
+      redirect_to root_url
     else
       flash[:danger] = "quiz failed"
       redirect_to (:back)

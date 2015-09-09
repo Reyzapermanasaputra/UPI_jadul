@@ -1,6 +1,7 @@
 class EvaluationsController < ApplicationController
   before_action :set_evaluation, only: [:show_result, :show, :edit, :update, :destroy]
   load_and_authorize_resource except: :create
+
   # GET /evaluations
   # GET /evaluations.json
   def index

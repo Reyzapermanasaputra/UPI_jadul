@@ -40,7 +40,7 @@
   <div class="panel panel-default">
     <div class="panel-body">
 
-       <p id="lead">
+       <p class="lead">
          <%= image_tag current_user.photo.url, class:"text-center" %><br /><br />
          Total Questions : <%= @evaluation.questions.size %><br />
          Id              : <%= current_user.identity %><br />

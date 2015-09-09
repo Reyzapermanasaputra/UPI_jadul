@@ -4,5 +4,5 @@
   <%= f.check_box :correct %>
   <%= f.label :correct, "correct" %>
 
-  <%= f.link_to_remove "Remove Answer",  class: "fa fa-minus text-primary" %>
+  <%= f.link_to_remove "Remove Answer",  class: "fa fa-asterisk btn btn-danger" %>
 </div></br>

@@ -1,11 +1,11 @@
 <div class="input-group input-group-lg">
   <strong><%= f.label "question" %></strong>
   <%= f.text_area :text, placeholder: "Question", class: "form-control" %><hr />
-  <%= f.link_to_remove "Remove Question", class: "fa fa-asterisk text-primary" %>
+  <%= f.link_to_remove "Remove Question", class: "fa fa-asterisk btn btn-danger" %>
 </div><br/>
 
   <%= f.fields_for :choices do |builder| %>
     <%= render "answer_field", :f => builder %>
   <% end %>
 
-  <p><%= f.link_to_add " Add Choice", :choices, class: "fa fa-plus text-primary" %></p>
+  <p><%= f.link_to_add " Add Choice", :choices, class: "fa fa-plus btn btn-success" %></p>

@@ -11,22 +11,20 @@
     </div>
   <% end %>
 <div class="input-group input-group-lg">
-  <%= f.text_field :title, :placeholder => "Title", :class => "form-control" %>
+  <%= f.text_field :title, :placeholder => "Title", :class => "form-control", required: true %>
 </div><br />
 
   <div class="input-group input-group-lg">
-    <%= f.text_field :due_time, 'data-behaviour' => 'datepicker', :placeholder => "Due Time", :class => "form-control"%>
+    <%= f.text_field :due_time, 'data-behaviour' => 'datepicker', :placeholder => "Due Time", :class => "form-control", required: true%>
   </div> <br/>
 
   <div class="input-group input-group-lg">
-    <%= f.cktext_area :description, :placeholder => "Description", :class => "form-control" %>
+    <%= f.cktext_area :description, :placeholder => "Description", :class => "form-control", required: true %>
   </div>
-
-  <div class="field">
-  </div>
+  <br/>
 
   <div class="actions">
-    <%= f.submit "Create Task", :class => "btn-btn-default" %>
+    <%= f.submit "Create Task", class: "btn btn-primary" %>
   </div>
 
 <script type="text/javascript">

@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 <br/><br/><br/><div class="panel panel-info">
   <div class="panel-heading">
     <h3 class="panel-title"><h2><%= @topic.level %> Evaluations </h4></h2>
@@ -17,7 +16,7 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Password</th>
+      <th>Created</th>
       <th>Action</th>
       <th colspan="3"></th>
     </tr>
@@ -26,7 +25,7 @@
     <% @evaluations.each do |evaluation| %>
       <tr>
         <td><%= evaluation.name %></td>
-        <td class="text-password"><%= evaluation.password %></td>
+        <td class="text-password"><%= evaluation.created_at %></td>
         <td><%= link_to 'Show', [evaluation.topic, evaluation], class: "btn btn-info" %></td>
         <td>
         <% if can? :update, Evaluation %>

@@ -1,12 +1,11 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_filter :authenticate_user!, except: [:show]
+  before_filter :authenticate_user!, except: [:show, :update]
   load_and_authorize_resource except: [:show, :following, :followers]
   # GET /users
   # GET /users.json
   def index
     @users = User.all
-    @users = User.order("identity").page(params[:page]).per(5)
   end
 
   def add_room
