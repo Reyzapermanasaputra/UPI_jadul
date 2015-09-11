@@ -2,7 +2,7 @@
 <% if current_student? %>
   <% controller.redirect_to root_url %>
 <% end %>
-<h1>Quiz Result <%= @topic.level %></h1>
+<h1><%= @topic.level %> Quiz Result </h1>
 <br>
 <div class="col-md-8">
   <p class="lead">
@@ -39,7 +39,8 @@
         <td><%= quiz.user.classrooms.collect { |a| a.name }.join(" ") %></td>
         <td><%= quiz.created_at.to_formatted_s(:long) %></td>
         <td><%= link_to 'check', [quiz.evaluation.topic, quiz.evaluation,quiz], class: "btn btn-primary" %></td>
-        <td><strong><%= total = quiz.scores.count * 100 / @evaluation.questions.count %></strong</td>
+        <td><strong><%= @total = quiz.scores.count * 100 / @evaluation.questions.count %>
+        </strong></td>
         <td><% if quiz.scores.any? %>
             <i class="fa fa-check"></i>
            <% else %>
@@ -52,4 +53,8 @@
     <% end %>
   </tbody>
 </table>
+<p class="lead text-right">
+ Student Total  : <%= @quiz.size %><br />
+ Average Scores : <%= (@total + @total) / @quiz.size %>
+</p>
 <%= link_to 'Back', topic_evaluations_path(@topic), class: "btn btn-danger"%>

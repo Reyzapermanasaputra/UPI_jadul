@@ -30,6 +30,10 @@
   <ul class="pager">
     <li class="next"><%= link_to "See Course", topic_units_path(topic.id), class: "text-primary" %>
      </li>
+  <li class="next"><%= link_to "Download Course", topic.attachment_url, class: "text-danger" %>
+     </li>
+  <li class="next"><%= link_to "Info Course", user_topic_path(topic.user, topic), class: "text-success" %>
+     </li>
   </ul>
 </nav>
 <div class="col-md-3">

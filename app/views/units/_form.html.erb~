@@ -13,7 +13,7 @@
 
   <div class="input-group input-group-lg">
     <%= f.label :content, "Unit" %>
-    <%= f.text_field :content, class: "form-control", required: true  %>
+    <%= f.text_area :content, class: "form-control", required: true, cols: 1  %>
   </div><br />
 
   <%= f.fields_for :contents do |builder| %>
@@ -23,7 +23,7 @@
   </div><br />
 
     <%= builder.label :body %>
-    <%= builder.cktext_area :body, required: true  %>
+    <%= builder.cktext_area :body %>
     <%= builder.link_to_remove "Remove", class: "btn btn-danger" %><br />
     <% end %>
 

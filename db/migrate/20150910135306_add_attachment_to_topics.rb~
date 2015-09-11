@@ -1,0 +1,4 @@
+class AddAttachmentToTopics < ActiveRecord::Migration
+  def change
+  end
+end

@@ -5,7 +5,7 @@ before_filter :authenticate_user!
   def index
     @topic = Topic.find(params[:topic_id])
     @evaluation = @topic.evaluations.find(params[:evaluation_id])
-    @quiz = @evaluation.quizzes.all.order('id DESC')
+    @quiz = @evaluation.quizzes.all.order('id ASC')
   end
 
   def start

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150906043516) do
+ActiveRecord::Schema.define(version: 20150910135306) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 20150906043516) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "identity"
   end
 
   create_table "classrooms_users", id: false, force: :cascade do |t|
@@ -275,6 +276,10 @@ ActiveRecord::Schema.define(version: 20150906043516) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.integer  "user_id"
+    t.string   "identity"
+    t.string   "chs"
+    t.string   "semester"
+    t.string   "attachment"
   end
 
   create_table "units", force: :cascade do |t|

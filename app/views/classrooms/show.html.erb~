@@ -1,4 +1,10 @@
 <br>
+
+<p class="lead">
+  <strong>Code :</strong>
+  <%= @classroom.identity %>
+</p>
+
 <p class="lead">
   <strong>Name:</strong>
   <%= @classroom.name %>

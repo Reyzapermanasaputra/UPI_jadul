@@ -1,6 +1,5 @@
 class Topic < ActiveRecord::Base
   has_many :units, :dependent => :destroy
-  has_many :questions, :dependent => :destroy
   has_many :assigments, :dependent => :destroy
   belongs_to :user
   has_many :evaluations, :dependent => :destroy

@@ -50,7 +50,7 @@ class TopicsController < ApplicationController
     @user = User.find(params[:user_id])
     @topic = @user.topics.find(params[:id])
     if @topic.update(topic_params)
-      redirect_to  redirect_to user_topics_url, notice: 'Topic was successfully updated.'
+      redirect_to user_topics_url, notice: 'Topic was successfully updated.'
     else
       render 'edit'
     end
@@ -73,6 +73,6 @@ class TopicsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def topic_params
-      params.require(:topic).permit(:level, :description, :avatar)
+      params.require(:topic).permit(:level, :description, :avatar, :chs, :identity, :semester, :attachment)
     end
 end

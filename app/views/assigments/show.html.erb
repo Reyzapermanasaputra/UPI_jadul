@@ -35,7 +35,8 @@
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>Name Student</th>
+      <th>NIM</th>
+      <th>Name</th>
       <th>Classroom</th>
       <th>Upload At</th>
       <th>Attachment</th>
@@ -49,12 +50,13 @@
   <tbody>
     <% @assigment.collection_assigments.each do |collection| %>
       <tr>
+        <td><%= collection.user.identity %></td>
         <td><%= collection.user.name %></td>
         <td><%= collection.user.classrooms.collect { |a| a.name }.join(" ") %></td>
         <td><%= collection.created_at.to_formatted_s(:long) %></td>
         <% if lecturer? %>
         <td class="lead"><%= link_to "Download Task", collection.attachment_url, class: "text-primary" %></td>
-        <td><%= link_to "Delete", [collection.assigment, collection], method: :delete, class: "btn btn-danger", data: {confirm: "Are you sure delete assigment ?"}, class: "btn btn-danger" %><td>
+        <td class="lead"><%= link_to "Delete", [collection.assigment, collection], method: :delete, class: "btn btn-danger", data: {confirm: "Are you sure delete assigment ?"}, class: "btn btn-danger" %><td>
         <% else %>
         <td><%= collection.attachment %></td>
         <% end %>

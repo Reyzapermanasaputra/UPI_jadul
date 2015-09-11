@@ -12,6 +12,11 @@
   <% end %>
 
   <div class="input-group input-group-lg">
+    <%= f.label :identity, "code" %><br>
+    <%= f.text_field :identity, class: "form-control", required: true %>
+  </div><br>
+
+  <div class="input-group input-group-lg">
     <%= f.label :name %><br>
     <%= f.text_field :name, class: "form-control", required: true %>
   </div><br>
