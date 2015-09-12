@@ -4,17 +4,19 @@
 <%= link_to 'New User', new_user_path, class: "btn btn-primary" %>
 </div>
 <div class="col-md-4">
+            <%= form_tag(users_path, :method => 'get', id: 'search-form') do %>
             <div class="input-group input-group-lg custom-search-form">
-              <input type="text" class="form-control" placeholder="Search">
+              <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "search" %>
               <span class="input-group-btn">
-              <i class="fa fa-search"><button class="btn btn-default" type="button"></i>
+              <%= submit_tag "search", class: "btn btn-default fa fa-search "%>
              </button>
              </span>
              </div><!-- /input-group -->
         </div>
 </div>
+            <% end %>
 <br>
-<table id="roles" class="table table-hover">
+<table class="table table-hover">
   <thead>
     <tr>
       <th class="info">Id</th>

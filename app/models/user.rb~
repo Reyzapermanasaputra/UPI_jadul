@@ -1,4 +1,9 @@
 class User < ActiveRecord::Base
+
+   #search
+   def self.search(search)
+       where("name LIKE ? OR identity LIKE ?","%#{search}%", "%#{search}%")
+   end
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -16,6 +21,11 @@ class User < ActiveRecord::Base
   has_many :reverse_relationships, foreign_key: "followed_id", class_name: "Relationship", dependent: :destroy
   has_many :followers, through: :reverse_relationships, source: :follower
   has_many :quizzes
+
+  #validation
+  validates :identity, uniqueness: true
+
+
   #feed time line
 
   def feed

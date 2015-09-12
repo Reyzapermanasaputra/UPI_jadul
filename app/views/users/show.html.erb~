@@ -19,7 +19,7 @@
                       <blockquote>
                       <p> <%= @user.name %></p>
                       <small>
-                        <cite title="Source Title">12302160
+                        <cite title="Source Title"><% link_to @user.identity, class: "text-primary" %>
                       </small>
                      </blockquote>
                       </p>
@@ -30,7 +30,7 @@
                    <%= form_for @user, :url => {:action => "add_room"} do |f| %>
                   <%= select_tag "adding_class",
 	          options_from_collection_for_select(Classroom.all, 'id',
-                  'name', @user.classrooms.map{ |j| j.id })%>
+                  'name', @user.classrooms.map{ |j| j.id })%><br />
                   <%= f.submit "add classroom", :class => "btn-btn-default"%>
                 <% end %>
                 <% end %>

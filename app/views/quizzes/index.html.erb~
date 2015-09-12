@@ -1,24 +1,27 @@
-<p id="notice"><%= notice %></p>
 <% if current_student? %>
   <% controller.redirect_to root_url %>
 <% end %>
-<h1><%= @topic.level %> Quiz Result </h1>
+<div class="row">
+<h3><%= @topic.level %> [<%= @evaluation.name %>]  </h3>
 <br>
-<div class="col-md-8">
-  <p class="lead">
-    <strong>name evaluation : </strong>
-    <%= @evaluation.name %>
-  </p>
-</div>
 <div class="col-md-4">
+            <%= form_tag(topic_evaluation_quizzes_path, method: 'get', id: 'search-form') do %>
             <div class="input-group input-group-lg custom-search-form">
-              <input type="text" class="form-control" placeholder="Search">
+              <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "search by date", 'data-behaviour' => 'datepicker' %>
               <span class="input-group-btn">
-              <i class="fa fa-search"><button class="btn btn-default" type="button"></i>
+              <%= submit_tag "search", class: "btn btn-default fa fa-search "%>
              </button>
              </span>
              </div><!-- /input-group -->
         </div>
+</div>
+<script type="text/javascript">
+  $('[data-behaviour~=datepicker]').datepicker({
+    format: 'yyyy/mm/dd',
+    startDate: '-3d'
+});
+</script>
+            <% end %>
 <br>
 <table class="table table-stripped">
   <thead>
@@ -33,6 +36,7 @@
     </tr>
   </thead>
   <tbody>
+<% @total_all = 0 %>
     <% @quiz.each do |quiz| %>
       <tr>
         <td><%= quiz.user.name %></td>
@@ -40,6 +44,7 @@
         <td><%= quiz.created_at.to_formatted_s(:long) %></td>
         <td><%= link_to 'check', [quiz.evaluation.topic, quiz.evaluation,quiz], class: "btn btn-primary" %></td>
         <td><strong><%= @total = quiz.scores.count * 100 / @evaluation.questions.count %>
+                    <% @total_all = @total_all + @total %>
         </strong></td>
         <td><% if quiz.scores.any? %>
             <i class="fa fa-check"></i>
@@ -53,8 +58,13 @@
     <% end %>
   </tbody>
 </table>
+<%= link_to 'Back', topic_evaluations_path(@topic), class: "btn btn-danger"%>
+<%= link_to "Report", report_quizzes_topic_evaluation_quizzes_path, class: "btn btn-primary" %>
 <p class="lead text-right">
  Student Total  : <%= @quiz.size %><br />
- Average Scores : <%= (@total + @total) / @quiz.size %>
+ <% if @total_all == 0 %>
+   Average Scores : 0
+ <% else %>
+   Average Scores : <%= @total_all / @quiz.size %>
+ <% end %>
 </p>
-<%= link_to 'Back', topic_evaluations_path(@topic), class: "btn btn-danger"%>

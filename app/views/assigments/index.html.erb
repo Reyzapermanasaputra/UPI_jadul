@@ -5,7 +5,8 @@
 <%= tabs %>
 <br /><hr />
   <div class="panel-body">
-      <p class="lead"><%= @topic.description %></p>
+       Chart students completed of assignment
+       <%= column_chart @assigments.group(:title).joins(:collection_assigments).count %>
     <% if lecturer? %>
       <%= link_to 'New Assignment', new_topic_assigment_path, :class => "btn btn-primary" %>
     <% end %>

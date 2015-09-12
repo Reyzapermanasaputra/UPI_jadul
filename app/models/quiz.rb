@@ -4,4 +4,5 @@ class Quiz < ActiveRecord::Base
   has_many :tasks, dependent: :destroy
   has_many :scores, dependent: :destroy
   accepts_nested_attributes_for :tasks
+
 end

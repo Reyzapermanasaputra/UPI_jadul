@@ -1,11 +1,12 @@
 class EvaluationsController < ApplicationController
   before_action :set_evaluation, only: [:show_result, :show, :edit, :update, :destroy]
   load_and_authorize_resource except: :create
+
   # GET /evaluations
   # GET /evaluations.json
   def index
     @topic = Topic.find(params[:topic_id])
-    @evaluations = @topic.evaluations.order('id ASC')
+    @evaluations = @topic.evaluations
   end
 
   # GET /evaluations/1

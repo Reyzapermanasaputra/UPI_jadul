@@ -43,7 +43,6 @@
       <% if lecturer? %>
       <th>Action</th>
       <% end %>
-      <th colspan="3"></th>
     </tr>
   </thead>
 
@@ -58,7 +57,7 @@
         <td class="lead"><%= link_to "Download Task", collection.attachment_url, class: "text-primary" %></td>
         <td class="lead"><%= link_to "Delete", [collection.assigment, collection], method: :delete, class: "btn btn-danger", data: {confirm: "Are you sure delete assigment ?"}, class: "btn btn-danger" %><td>
         <% else %>
-        <td><%= collection.attachment %></td>
+        <td><i class="fa fa-check"></i></td>
         <% end %>
       </tr>
     <% end %>

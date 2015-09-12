@@ -3,9 +3,29 @@ http_basic_authenticate_with name: "rey", password: "test", only: :start
 before_filter :authenticate_user!
 
   def index
-    @topic = Topic.find(params[:topic_id])
-    @evaluation = @topic.evaluations.find(params[:evaluation_id])
-    @quiz = @evaluation.quizzes.all.order('id ASC')
+     unless params[:search].blank?
+     @topic = Topic.find(params[:topic_id])
+     @evaluation = @topic.evaluations.find(params[:evaluation_id])
+     @selected_date = Date.parse(params[:search])
+     @quiz = @evaluation.quizzes.where(:updated_at => @selected_date.beginning_of_day..@selected_date.end_of_day)
+     else
+     @topic = Topic.find(params[:topic_id])
+     @evaluation = @topic.evaluations.find(params[:evaluation_id])
+     @quiz = @evaluation.quizzes.all.order('id ASC')
+    end
+  end
+
+  def report
+   unless params[:search].blank?
+     @topic = Topic.find(params[:topic_id])
+     @evaluation = @topic.evaluations.find(params[:evaluation_id])
+     @selected_date = Date.parse(params[:search])
+     @quiz = @evaluation.quizzes.where(:updated_at => @selected_date.beginning_of_day..@selected_date.end_of_day)
+     else
+     @topic = Topic.find(params[:topic_id])
+     @evaluation = @topic.evaluations.find(params[:evaluation_id])
+     @quiz = @evaluation.quizzes.all.order('id ASC')
+    end
   end
 
   def start

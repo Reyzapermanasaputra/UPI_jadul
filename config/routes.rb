@@ -32,7 +32,13 @@ Rails.application.routes.draw do
          end
          resources :units
          resources :evaluations do
+           collection do
+  	     get '/chart', to: 'evaluations#chart', as: :chart_evaluations
+	   end
            resources :quizzes do
+             collection do
+  	       get '/report', to: 'quizzes#report', as: :report_quizzes
+	     end
              resources :scores
            end
           collection do

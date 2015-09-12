@@ -5,7 +5,7 @@ class AssigmentsController < ApplicationController
   # GET /assigments.json
   def index
     @topic = Topic.find(params[:topic_id])
-    @assigments = @topic.assigments.order('id ASC')
+    @assigments = @topic.assigments
   end
 
   # GET /assigments/1

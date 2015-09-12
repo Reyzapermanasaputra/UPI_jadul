@@ -5,7 +5,9 @@
 <%= tabs %>
 <br /><hr />
   <div class="panel-body">
-      <p class="lead"><%= @topic.description %></p>
+      Chart students completed of evaluation
+      <%= bar_chart @evaluations.group(:name).joins(:quizzes).size %>
+<p class="text-center">student completed</p>
     <% if can? :create, Evaluation %>
       <%= link_to 'New Evaluation', new_topic_evaluation_path, class: "btn btn-default" %>
     <% end %>

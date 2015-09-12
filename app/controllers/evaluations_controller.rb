@@ -6,7 +6,7 @@ class EvaluationsController < ApplicationController
   # GET /evaluations.json
   def index
     @topic = Topic.find(params[:topic_id])
-    @evaluations = @topic.evaluations.order('id ASC')
+    @evaluations = @topic.evaluations
   end
 
   # GET /evaluations/1

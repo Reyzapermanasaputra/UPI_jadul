@@ -5,7 +5,9 @@
 <%= tabs %>
 <br /><hr />
   <div class="panel-body">
-      <p class="lead"><%= @topic.description %></p>
+       Chart students completed of assignment
+       <%= column_chart @assigments.group(:title).joins(:collection_assigments).count %>
+       <p class="text-center">student completed</p>
     <% if lecturer? %>
       <%= link_to 'New Assignment', new_topic_assigment_path, :class => "btn btn-primary" %>
     <% end %>
@@ -27,7 +29,7 @@
       <tr>
         <td class="lead"><%= assigment.title %></td>
         <td class="lead"><%= assigment.due_time %></td>
-        <td class="lead"><span class="label label-info"><%= assigment.collection_assigments.size %> student completed</span></td>
+        <td class="lead"><span class="label label-info"><%= assigment.collection_assigments.size %> completed</span></td>
 
       <% unless lecturer? and assigment.due_time <= Time.now.strftime('%m/%d/%Y') %>
         <td class="lead"><span class="label label-info">Available</span></td>

@@ -1,0 +1,69 @@
+<% if current_student? %>
+  <% controller.redirect_to root_url %>
+<% end %>
+<div class="row">
+<div class="col-md-12">
+<h1 class="text-center">Report <%= @evaluation.name %></h1>
+<h4 class="text-center">created at : <%= Time.now.to_formatted_s(:long) %></h4>
+<h4 class="text-center">lecturer : <%= current_user.name %></h4>
+
+</div>
+</div>
+<div class="col-md-8">
+            <%= form_tag(report_quizzes_topic_evaluation_quizzes_path, method: 'get', id: 'search-form') do %>
+            <div class="input-group input-group-lg custom-search-form">
+              <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "filter report by date", 'data-behaviour' => 'datepicker' %>
+              <span class="input-group-btn">
+              <%= submit_tag "search", class: "btn btn-default fa fa-search "%>
+             </button>
+             </span>
+             </div><!-- /input-group -->
+        </div>
+<script type="text/javascript">
+  $('[data-behaviour~=datepicker]').datepicker({
+    format: 'yyyy/mm/dd',
+    startDate: '-3d'
+});
+</script>
+            <% end %>
+<br>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Class</th>
+      <th>Date</th>
+      <th>Score</th>
+    </tr>
+  </thead>
+  <tbody>
+<% @total_all = 0 %>
+    <% @quiz.each do |quiz| %>
+      <tr>
+        <td><%= quiz.user.name %></td>
+        <td><%= quiz.user.classrooms.collect { |a| a.name }.join(" ") %></td>
+        <td><%= quiz.created_at.to_formatted_s(:long) %></td>
+        <td><strong><%= @total = quiz.scores.count * 100 / @evaluation.questions.count %>
+                    <% @total_all = @total_all + @total %>
+        </strong></td>
+      </tr>
+    <% end %>
+  <tr>
+     <td colspan="3"><strong>Average</stong></td>
+     <td colspan="3">
+		<% if @total_all == 0 %>
+ 		   <strong>0</stong>
+		<% else %>
+   		   <strong><%= @total_all / @quiz.size %></strong>
+		<% end %>
+     </td>
+  </tr>
+    <tr>
+     <td colspan="3"><strong>Student Total</strong></td>
+     <td colspan="3"><strong><%= @quiz.size %></strong></td>
+    </tr>
+  </tbody>
+</table>
+<p class="text-right">
+<%= link_to 'print', 'your_link_here', :onclick => 'window.print();return false;', class:"btn btn-danger"%>
+</p>
