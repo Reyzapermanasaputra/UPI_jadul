@@ -32,7 +32,7 @@
 </ol>
     </div>
   </div>
-    <p class="text-right"><%= submit_tag "Finish", class: "btn btn-lg btn-default" %></p>
+    <p class="text-right"><%= submit_tag "Finish", class: "btn btn-lg btn-danger" %></p>
 <% end %>
 </div>
 

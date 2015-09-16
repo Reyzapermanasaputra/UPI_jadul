@@ -5,7 +5,7 @@
 <div class="col-md-12">
 <h1 class="text-center">Report <%= @evaluation.name %></h1>
 <h4 class="text-center">created at : <%= Time.now.to_formatted_s(:long) %></h4>
-<h4 class="text-center">lecturer : <%= current_user.name %> %></h4>
+<h4 class="text-center">lecturer : <%= current_user.name %></h4>
 
 </div>
 </div>
