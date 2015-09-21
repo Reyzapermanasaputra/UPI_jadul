@@ -7,14 +7,16 @@
 <br />
 </div>
   <div class="col-md-4">
+            <%= form_tag(user_topics_path, :method => 'get', id: 'search-form') do %>
             <div class="input-group input-group-lg custom-search-form">
-              <input type="text" class="form-control" placeholder="Search">
+              <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "search" %>
               <span class="input-group-btn">
-              <i class="fa fa-search"><button class="btn btn-default" type="button"></i>
+              <%= submit_tag "search", class: "btn btn-default fa fa-search "%>
              </button>
              </span>
              </div><!-- /input-group -->
         </div>
+            <% end %>
 </div><br />
 <ul class="nav">
     <% @topics.each do |topic| %>
@@ -32,7 +34,7 @@
      </li>
   <li class="next"><%= link_to "Download Course", topic.attachment_url, class: "text-danger" %>
      </li>
-  <li class="next"><%= link_to "Info Course", user_topic_path(@user.id), class: "text-success" %>
+  <li class="next"><%= link_to "Info Course", user_topic_path(topic.user, topic), class: "text-success" %>
      </li>
   </ul>
 </nav>

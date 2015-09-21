@@ -13,4 +13,8 @@ class Topic < ActiveRecord::Base
 
  #file upload
  mount_uploader :attachment, AttachmentUploader
+ #seach
+ def self.search(search)
+       where("level LIKE ?", "%#{search}%")
+   end
 end

@@ -4,8 +4,13 @@ class TopicsController < ApplicationController
   # GET /topics
   # GET /topics.json
   def index
-    @user = User.find(params[:user_id])
-    @topics = @user.topics.all.order('id ASC')
+    if params[:search]
+      @user = User.find(params[:user_id])
+      @topics = @user.topics.search(params[:search])
+    else
+      @user = User.find(params[:user_id])
+      @topics = @user.topics.all.order('id ASC')
+    end
   end
 
   # GET /topics/1

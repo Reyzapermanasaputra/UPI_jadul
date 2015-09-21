@@ -3,8 +3,13 @@ class CoursesController < ApplicationController
   # GET /courses
   # GET /courses.json
   def index
-    user = User.find_by_id(params[:user_id])
-    @courses = user.courses
+    if params[:search]
+      user = User.find_by_id(params[:user_id])
+      @courses = user.courses.search(params[:search])
+    else
+      user = User.find_by_id(params[:user_id])
+      @courses = user.courses
+    end
   end
 
   # GET /courses/1
